@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE tiles-definitions PUBLIC 
+          "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+          "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    
+    <!-- Base default User Page Layoyts -->
+    <definition name="base.defaultuserpage"
+                template="/layouts/factoryDreamDesign/layoutFactoryDreamHomeDefaultUserPage.jsp">
+        <put-attribute name="title"  value="" />
+        <put-attribute name="body"   value="" />
+
+    </definition>
+    
+    <!-- Base default User Page Layoyts -->
+    <definition name="base.OrdersPage"
+                template="/layouts/factoryDreamDesign/layoutFactoryDreamOrdersPage.jsp">
+        <put-attribute name="title"  value="" />
+        <put-attribute name="body"   value="" />
+
+    </definition>
+    
+    <!-- Base login Page Layoyts -->
+    <definition name="base.loginpage"
+                template="/layouts/factoryDreamDesign/layoutFactoryDreamLoginPage.jsp">
+        <put-attribute name="title"  value="" />
+        <put-attribute name="body"   value="" />
+
+    </definition>
+      
+    <!-- login page -->
+    <definition name="login" extends="base.loginpage">
+        <put-attribute name="title" value="Login Page"/>
+        <put-attribute name="body"  value="/backend/tiles/body/bodyLogin.jsp"/>
+        
+    </definition>
+
+        
+    <!-- home page -->    
+    <definition name="home" extends="base.defaultuserpage">
+        <put-attribute name="title" value="Home Page"/>
+        <put-attribute name="body"  value="/backend/tiles/body/bodyHome.jsp" />
+    </definition>
+    
+      <!-- home page -->    
+    <definition name="ordershome" extends="base.OrdersPage">
+        <put-attribute name="title" value="Orders Page"/>
+        <put-attribute name="body"  value="/backend/tiles/body/bodyOrdersHome.jsp" />
+    </definition>
+        
+        
+</tiles-definitions>

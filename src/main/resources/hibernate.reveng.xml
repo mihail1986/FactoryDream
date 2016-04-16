@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="FactoryManagementDreams" match-schema="public"/>
+  <table-filter match-name="customers"/>
+  <table-filter match-name="appointment"/>
+  <table-filter match-name="url"/>
+  <table-filter match-name="param_names"/>
+  <table-filter match-name="equipment"/>
+  <table-filter match-name="report_order_params"/>
+  <table-filter match-name="order_parameters"/>
+  <table-filter match-name="events"/>
+  <table-filter match-name="notes"/>
+  <table-filter match-name="colors"/>
+  <table-filter match-name="status_group"/>
+  <table-filter match-name="models"/>
+  <table-filter match-name="types"/>
+  <table-filter match-name="group_notes"/>
+  <table-filter match-name="order_note"/>
+  <table-filter match-name="jobs_history"/>
+  <table-filter match-name="users"/>
+  <table-filter match-name="jobs"/>
+  <table-filter match-name="reports"/>
+  <table-filter match-name="report_template"/>
+  <table-filter match-name="event_parameters"/>
+  <table-filter match-name="user_department"/>
+  <table-filter match-name="note_groups"/>
+  <table-filter match-name="employees"/>
+  <table-filter match-name="diameters"/>
+  <table-filter match-name="template_parameters"/>
+  <table-filter match-name="planning_appointment"/>
+  <table-filter match-name="roles"/>
+  <table-filter match-name="employees_jobs"/>
+  <table-filter match-name="status_cod"/>
+  <table-filter match-name="statuses"/>
+  <table-filter match-name="orders"/>
+  <table-filter match-name="role_access"/>
+  <table-filter match-name="threads"/>
+  <table-filter match-name="report_sequence"/>
+  <table-filter match-name="departments"/>
+  <table-filter match-name="access"/>
+  <table-filter match-name="report_params"/>
+</hibernate-reverse-engineering>
