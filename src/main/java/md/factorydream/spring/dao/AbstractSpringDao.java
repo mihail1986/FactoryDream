@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 public abstract class AbstractSpringDao {
 

@@ -47,11 +47,18 @@ and open the template in the editor.
         <put-attribute name="body"  value="/backend/tiles/body/bodyHome.jsp" />
     </definition>
     
-      <!-- home page -->    
+    <!-- home page -->    
     <definition name="ordershome" extends="base.OrdersPage">
         <put-attribute name="title" value="Orders Page"/>
         <put-attribute name="body"  value="/backend/tiles/body/bodyOrdersHome.jsp" />
     </definition>
         
+    <!-- access Denied page -->    
+    <definition name="accessDenied" extends="base.loginpage">
+        <put-attribute name="title" value="Access Denied Page"/>
+        <put-attribute name="body"  value="/backend/tiles/body/bodyAccessDenied.jsp"/>
+        
+    </definition>   
+            
         
 </tiles-definitions>

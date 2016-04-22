@@ -10,11 +10,11 @@ import md.factorydream.entites.Customers;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 public interface CustomersDAO {
 
     public void save(Customers customers);
 
-    public List<Customers> findAll();
+    public List findAll();
 }

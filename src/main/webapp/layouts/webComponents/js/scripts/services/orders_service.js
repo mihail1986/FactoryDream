@@ -4,11 +4,32 @@
  *  Author     : Mihail.Cepraga
  */
 
+'use strict';
+
 angular.module('ordersApp').factory('ordersService', ['$http', '$q', function ($http, $q) {
 
         return {
             fetchAllOrders: function () {
-                return $http.get('rest/orders')
+                return $http.get('/FactoryDream/rest/orders')
+                        .then(
+                                function (response) {
+                                    return response;
+                                },
+                                function (errResponse) {
+                                    console.error('Error while fetching ordersService Service');
+                                    return $q.reject(errResponse);
+                                }
+                        );
+            }
+        };
+        }]);
+
+/*
+angular.module('ordersApp').factory('ordersService', ['$http', '$q', function ($http, $q) {
+
+        return {
+            fetchAllOrders: function () {
+                return $http.get('/rest/orders')
                         .then(
                                 function (response) {
                                     return response.data;
@@ -20,7 +41,7 @@ angular.module('ordersApp').factory('ordersService', ['$http', '$q', function ($
                         );
             },
             createOrder: function (order) {
-                return $http.post('save/orders/', order)
+                return $http.post('/save/orders', order)
                         .then(
                                 function (response) {
                                     console.log("save/orders/");
@@ -60,3 +81,4 @@ angular.module('ordersApp').factory('ordersService', ['$http', '$q', function ($
         };
 
     }]);
+*/

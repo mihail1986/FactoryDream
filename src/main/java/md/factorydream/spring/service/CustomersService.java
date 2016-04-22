@@ -10,7 +10,7 @@ import md.factorydream.entites.Customers;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 public interface CustomersService {
 

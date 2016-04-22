@@ -28,7 +28,6 @@ public class OrderParameters implements java.io.Serializable {
     private StatusCod statusCod;
     private Users users;
     private String value;
-    private String note;
     private Date lastUpdateDate;
 
     public OrderParameters() {
@@ -42,14 +41,13 @@ public class OrderParameters implements java.io.Serializable {
         this.value = value;
     }
 
-    public OrderParameters(long id, Orders orders, ParamNames paramNames, StatusCod statusCod, Users users, String value, String note, Date lastUpdateDate) {
+    public OrderParameters(long id, Orders orders, ParamNames paramNames, StatusCod statusCod, Users users, String value, Date lastUpdateDate) {
         this.id = id;
         this.orders = orders;
         this.paramNames = paramNames;
         this.statusCod = statusCod;
         this.users = users;
         this.value = value;
-        this.note = note;
         this.lastUpdateDate = lastUpdateDate;
     }
 
@@ -111,15 +109,6 @@ public class OrderParameters implements java.io.Serializable {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    @Column(name = "note", length = 250)
-    public String getNote() {
-        return this.note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

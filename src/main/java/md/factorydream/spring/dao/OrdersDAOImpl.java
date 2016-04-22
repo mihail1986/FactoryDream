@@ -22,7 +22,7 @@ public class OrdersDAOImpl extends AbstractSpringDao implements OrdersDAO{
     }
 
     @Override
-    public List<Orders> findAll() {
+    public List findAll() {
         return super.findAll(Orders.class);
     }    
 }

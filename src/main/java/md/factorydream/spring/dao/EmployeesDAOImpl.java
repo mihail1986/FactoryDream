@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Victor
+ * @author Zaițev.Victor
  */
 @Repository
 public class EmployeesDAOImpl extends AbstractSpringDao implements EmployeesDAO {

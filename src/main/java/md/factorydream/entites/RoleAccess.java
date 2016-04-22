@@ -64,7 +64,7 @@ public class RoleAccess implements java.io.Serializable {
         this.access = access;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", nullable = false)
     public Roles getRoles() {
         return this.roles;

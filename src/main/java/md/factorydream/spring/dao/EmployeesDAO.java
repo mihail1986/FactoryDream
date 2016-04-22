@@ -10,7 +10,7 @@ import md.factorydream.entites.Employees;
 
 /**
  *
- * @author Victor
+ * @author Zaițev.Victor
  */
 public interface EmployeesDAO {
 

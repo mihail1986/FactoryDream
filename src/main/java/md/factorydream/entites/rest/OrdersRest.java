@@ -5,52 +5,54 @@
  */
 package md.factorydream.entites.rest;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author Mihail.Cepraga
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class OrdersRest {
 
     private long id;
-    private String colorName;
-    private String customerName;
-    private String diameterValue;
-    private String modelName;
-    private String statusName;
-    private String threadName;
-    private String typeName;
+    private int color;
+    private long customer;
+    private int diameter;
+    private int model;
+    private int status;
+    private int thread;
+    private int type;
     private Date orderData;
     private String orderIdentifier;
     private int quantity;
     private Date delivery;
     private Date distributionDate;
     private Date lastUpdateDate;
+    private Set<OrderParametersRestValue> orderParameterses = new HashSet<>();
+    private Set<OrderNotesRestValue> orderNotes = new HashSet<>();
 
-    public OrdersRest() {
-    }
-
-    public OrdersRest(long id, String colorName, String customerName, String diameterValue, String modelName, String statusName, String threadName, String typeName, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate) {
+     public OrdersRest(){}
+    
+    public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, Set<OrderNotesRestValue> orderNotes) {
         this.id = id;
-        this.colorName = colorName;
-        this.customerName = customerName;
-        this.diameterValue = diameterValue;
-        this.modelName = modelName;
-        this.statusName = statusName;
-        this.threadName = threadName;
-        this.typeName = typeName;
+        this.color = colorId;
+        this.customer = customerId;
+        this.diameter = diameterId;
+        this.model = modelId;
+        this.status = statusId;
+        this.thread = threadId;
+        this.type = typeId;
         this.orderData = orderData;
         this.orderIdentifier = orderIdentifier;
         this.quantity = quantity;
         this.delivery = delivery;
         this.distributionDate = distributionDate;
         this.lastUpdateDate = lastUpdateDate;
+        this.orderParameterses = orderParameterses;
+        this.orderNotes = orderNotes;
     }
-
+  
     public long getId() {
         return id;
     }
@@ -59,60 +61,60 @@ public class OrdersRest {
         this.id = id;
     }
 
-    public String getColorName() {
-        return colorName;
+    public int getColor() {
+        return color;
     }
 
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public long getCustomer() {
+        return customer;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomer(int customerId) {
+        this.customer = customerId;
     }
 
-    public String getDiameterValue() {
-        return diameterValue;
+    public int getDiameter() {
+        return diameter;
     }
 
-    public void setDiameterValue(String diameterValue) {
-        this.diameterValue = diameterValue;
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
     }
 
-    public String getModelName() {
-        return modelName;
+    public int getModel() {
+        return model;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void setModel(int model) {
+        this.model = model;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public String getThreadName() {
-        return threadName;
+    public int getThread() {
+        return thread;
     }
 
-    public void setThreadName(String threadName) {
-        this.threadName = threadName;
+    public void setThread(int thread) {
+        this.thread = thread;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public int getType() {
+        return type;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public Date getOrderData() {
@@ -163,4 +165,21 @@ public class OrdersRest {
         this.lastUpdateDate = lastUpdateDate;
     }
 
+    public Set<OrderParametersRestValue> getOrderParameterses() {
+        return orderParameterses;
+    }
+
+    public void setOrderParameterses(Set<OrderParametersRestValue> orderParameterses) {
+        this.orderParameterses = orderParameterses;
+    }
+
+    public Set<OrderNotesRestValue> getOrderNotes() {
+        return orderNotes;
+    }
+
+    public void setOrderNotes(Set<OrderNotesRestValue> orderNotes) {
+        this.orderNotes = orderNotes;
+    }
+
+   
 }

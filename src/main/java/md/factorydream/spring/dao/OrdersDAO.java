@@ -16,6 +16,6 @@ public interface OrdersDAO {
     
     public void save(Orders orders);
     
-    public List<Orders> findAll();
+    public List findAll();
     
 }

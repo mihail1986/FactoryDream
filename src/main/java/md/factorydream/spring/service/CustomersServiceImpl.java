@@ -15,7 +15,7 @@ import md.factorydream.spring.dao.CustomersDAO;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 @Service
 public class CustomersServiceImpl implements CustomersService {

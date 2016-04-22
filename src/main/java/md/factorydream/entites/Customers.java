@@ -92,7 +92,7 @@ public class Customers implements java.io.Serializable {
         this.users = users;
     }
 
-    @Column(name = "name", nullable = false, length = 250)
+    @Column(name = "name", unique = true, nullable = false, length = 250)
     public String getName() {
         return this.name;
     }

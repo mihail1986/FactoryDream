@@ -122,7 +122,7 @@ public class Users implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_status_code")
     public StatusCod getStatusCod() {
         return this.statusCod;
@@ -132,7 +132,7 @@ public class Users implements java.io.Serializable {
         this.statusCod = statusCod;
     }
 
-    @Column(name = "login", nullable = false, length = 50)
+    @Column(name = "login", unique = true, nullable = false, length = 50)
     public String getLogin() {
         return this.login;
     }
@@ -367,7 +367,7 @@ public class Users implements java.io.Serializable {
         this.jobsHistories = jobsHistories;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
     public Set<RoleAccess> getRoleAccesses() {
         return this.roleAccesses;
     }

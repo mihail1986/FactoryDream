@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Victor
+ * @author Zaițev.Victor
  */
 @Service
 public class EmployeesServiceImpl implements EmployeesService {

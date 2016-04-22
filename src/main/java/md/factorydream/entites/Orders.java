@@ -242,7 +242,7 @@ public class Orders implements java.io.Serializable {
         this.appointments = appointments;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "orders")
     public Set<OrderParameters> getOrderParameterses() {
         return this.orderParameterses;
     }
@@ -251,7 +251,7 @@ public class Orders implements java.io.Serializable {
         this.orderParameterses = orderParameterses;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "orders")
     public Set<OrderNote> getOrderNotes() {
         return this.orderNotes;
     }

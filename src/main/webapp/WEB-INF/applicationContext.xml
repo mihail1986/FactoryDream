@@ -132,4 +132,32 @@
     <bean id="ordersService" class="md.factorydream.spring.service.OrdersServiceImpl">
         <property name="ordersDAO" ref="ordersDAO"></property>
     </bean>
+    
+    <bean id="roleAccessDAO" class="md.factorydream.spring.dao.RoleAccessDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>            
+    </bean>
+    
+    
+    <bean id="roleAccessSevice" class="md.factorydream.spring.service.RoleAccessSeviceImpl">
+        <property name="roleAccessDAO" ref="roleAccessDAO"></property>
+    </bean>
+    
+    <bean id="usersDAO" class="md.factorydream.spring.dao.UsersDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    
+    <bean id="usersService" class="md.factorydream.spring.service.UsersServiceImpl">
+        <property name="usersServiceDAO" ref="usersDAO" ></property>
+    </bean>
+    
+    
+    <bean id="modelsDAO" class="md.factorydream.spring.dao.ModelsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="modelsService" class="md.factorydream.spring.service.ModelsServiceImpl">
+        <property name="modelsDAO" ref="modelsDAO"></property>        
+    </bean>
+    
 </beans>

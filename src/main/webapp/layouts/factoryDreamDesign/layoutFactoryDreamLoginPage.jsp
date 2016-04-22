@@ -1,7 +1,7 @@
 <%-- 
     Document   : layoutFactoryDream
     Created on : Mar 21, 2016, 3:33:27 PM
-    Author     : PC01017745
+    Author     : Zaițev.Victor
 --%>
 <jsp:directive.page contentType="text/html; charset=UTF-8" />
 <%@ page contentType="text/html; charset=UTF-8" %>

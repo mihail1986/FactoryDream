@@ -21,6 +21,9 @@
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- UI-Grid Core CSS -->
+        <link href="css/cssGrid/ui-grid.min.css" rel="styleSheet">
+        
         <!-- main CSS -->
         <link href="css/main.css" rel="stylesheet">
 

@@ -22,7 +22,7 @@ import md.factorydream.spring.service.CustomersService;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 @Controller
 public class MultiActionControllers {
@@ -49,13 +49,14 @@ public class MultiActionControllers {
         return new ModelAndView("login", "message", message);
     }
 
-    //----------------------- Home Page ----------------------------------------------------
+    //----------------------- Orders Page ----------------------------------------------------
     @RequestMapping(value = "/orders")
     public String getOrders() {
 
         return "ordershome";
     }
-    
+
+    //----------------------- Home Page ----------------------------------------------------
     @RequestMapping(value = "/home")
     public String home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -73,16 +74,9 @@ public class MultiActionControllers {
     @RequestMapping(value = "/403page")
     public String accessDenied(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        return "login";
+        String name = auth.getName();
+        model.addAttribute("activeUser", name);
+        return "accessDenied";
     }
-    
-    
-    
-    
-    
-    
-    
-    
 
 }

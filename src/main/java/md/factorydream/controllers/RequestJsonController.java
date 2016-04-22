@@ -16,23 +16,23 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 @RestController
 public class RequestJsonController {
 
     //------------------- Save a Orders --------------------------------------------------------
-    @RequestMapping(value = "save/orders/", method = RequestMethod.POST)
+    @RequestMapping(value = "/save/orders", method = RequestMethod.POST)
     public ResponseEntity<OrdersRest> createUser(@RequestBody OrdersRest ordersRest, UriComponentsBuilder ucBuilder) {
 
         System.out.println(" Orders Id " + ordersRest.getId());
-        System.out.println(" colorName " + ordersRest.getColorName());
-        System.out.println(" customerName " + ordersRest.getCustomerName());
-        System.out.println(" diameterValue " + ordersRest.getDiameterValue());
-        System.out.println(" modelName " + ordersRest.getModelName());
-        System.out.println(" statusName " + ordersRest.getStatusName());
-        System.out.println(" threadName " + ordersRest.getThreadName());
-        System.out.println(" typeName " + ordersRest.getTypeName());
+        System.out.println(" colorName " + ordersRest.getColor());
+        System.out.println(" customerName " + ordersRest.getCustomer());
+        System.out.println(" diameterValue " + ordersRest.getDiameter());
+        System.out.println(" modelName " + ordersRest.getModel());
+        System.out.println(" statusName " + ordersRest.getStatus());
+        System.out.println(" threadName " + ordersRest.getThread());
+        System.out.println(" typeName " + ordersRest.getType());
         System.out.println(" orderData " + ordersRest.getOrderData());
         System.out.println(" orderIdentifier " + ordersRest.getOrderIdentifier());
         System.out.println(" quantity " + ordersRest.getQuantity());
@@ -40,7 +40,7 @@ public class RequestJsonController {
         System.out.println(" distributionDate " + ordersRest.getDistributionDate());
         System.out.println(" lastUpdateDate " + ordersRest.getLastUpdateDate());
 
-        return new ResponseEntity<OrdersRest>(ordersRest, HttpStatus.OK);
+        return new ResponseEntity<>(ordersRest, HttpStatus.OK);
     }
 
 }

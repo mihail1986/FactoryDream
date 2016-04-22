@@ -19,4 +19,6 @@ public interface OrdersService {
     public List findAll();
     
     public List findAllOrdersRest();
+    
+    public List findAllOrdersRestReadOnly();
 }

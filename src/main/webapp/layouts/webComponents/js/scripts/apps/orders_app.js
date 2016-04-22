@@ -3,5 +3,4 @@
  *  Created on : Apr 14, 2016, 
  *  Author     : Mihail.Cepraga
  */
-angular.module('ordersApp', []);
-
+angular.module('ordersApp', ['ngAnimate', 'ngTouch', 'ui.grid', 'ui.grid.edit']);
