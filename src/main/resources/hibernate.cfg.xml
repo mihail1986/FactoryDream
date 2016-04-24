@@ -4,8 +4,8 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://92.39.63.52:5432/FactoryManagementDreams?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory</property>
-    <property name="hibernate.connection.username">pgAdmin</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/FactoryManagementDreams</property>
+    <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">postgres</property>
     <mapping class="md.factorydream.entites.NoteGroups"/>
     <mapping class="md.factorydream.entites.Roles"/>
