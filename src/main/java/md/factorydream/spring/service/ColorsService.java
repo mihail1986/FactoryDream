@@ -6,19 +6,19 @@
 package md.factorydream.spring.service;
 
 import java.util.List;
-import md.factorydream.entites.Customers;
+import md.factorydream.entites.Colors;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface CustomersService {
+public interface ColorsService {
 
-    public void save(Customers customers);
+    public void save(Colors colors);
 
     public List findAll();
 
-    public List findAllEnableCustomers();
+    public List findAllEnableColors();
 
-    public List findAllEnableCustomersRest();
+    public List findAllEnableColorsRest();
 }

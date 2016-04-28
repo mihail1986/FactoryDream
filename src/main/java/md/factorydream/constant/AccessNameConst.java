@@ -7,7 +7,7 @@ package md.factorydream.constant;
 
 /**
  *
- * @author PC01017745
+ * @author Zaițev.Victor
  */
 public class AccessNameConst {
 

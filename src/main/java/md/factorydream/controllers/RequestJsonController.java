@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
@@ -23,7 +22,7 @@ public class RequestJsonController {
 
     //------------------- Save a Orders --------------------------------------------------------
     @RequestMapping(value = "/save/orders", method = RequestMethod.POST)
-    public ResponseEntity<OrdersRest> createUser(@RequestBody OrdersRest ordersRest, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<OrdersRest> createUser(@RequestBody OrdersRest ordersRest) {
 
         System.out.println(" Orders Id " + ordersRest.getId());
         System.out.println(" colorName " + ordersRest.getColor());
@@ -39,8 +38,11 @@ public class RequestJsonController {
         System.out.println(" delivery " + ordersRest.getDelivery());
         System.out.println(" distributionDate " + ordersRest.getDistributionDate());
         System.out.println(" lastUpdateDate " + ordersRest.getLastUpdateDate());
+        System.out.println(" OrderParametersRestValue " + ordersRest.getOrderParameterses());
+        System.out.println(" OrderNotesRestValue " + ordersRest.getOrderNotes());
 
         return new ResponseEntity<>(ordersRest, HttpStatus.OK);
+
     }
 
 }

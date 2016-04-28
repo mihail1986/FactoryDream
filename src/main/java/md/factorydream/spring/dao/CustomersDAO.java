@@ -17,4 +17,6 @@ public interface CustomersDAO {
     public void save(Customers customers);
 
     public List findAll();
+
+    public List findAllEnableCustomers();
 }

@@ -26,6 +26,7 @@ public class Users implements java.io.Serializable {
 
     private int id;
     private StatusCod statusCod;
+    private Languages languages;
     private String login;
     private String password;
     private String note;
@@ -71,9 +72,10 @@ public class Users implements java.io.Serializable {
         this.password = password;
     }
 
-    public Users(int id, StatusCod statusCod, String login, String password, String note, Date lastUpdateDate, Set<Diameters> diameterses, Set<OrderParameters> orderParameterses, Set<ReportTemplate> reportTemplates, Set<Appointment> appointments, Set<Employees> employeeses, Set<Statuses> statuseses, Set<Departments> departmentses, Set<Jobs> jobses, Set<Orders> orderses, Set<UserDepartment> userDepartments, Set<Colors> colorses, Set<Customers> customerses, Set<Equipment> equipments, Set<TemplateParameters> templateParameterses, Set<NoteGroups> noteGroupses, Set<StatusCod> statusCods, Set<Events> eventses, Set<Threads> threadses, Set<ReportSequence> reportSequences, Set<Reports> reportses, Set<Types> typeses, Set<JobsHistory> jobsHistories, Set<RoleAccess> roleAccesses, Set<GroupNotes> groupNoteses, Set<StatusGroup> statusGroups, Set<EventParameters> eventParameterses, Set<Roles> roleses, Set<ParamNames> paramNameses, Set<OrderNote> orderNotes, Set<Notes> noteses, Set<Models> modelses) {
+    public Users(int id, StatusCod statusCod, Languages languages, String login, String password, String note, Date lastUpdateDate, Set<Diameters> diameterses, Set<OrderParameters> orderParameterses, Set<ReportTemplate> reportTemplates, Set<Appointment> appointments, Set<Employees> employeeses, Set<Statuses> statuseses, Set<Departments> departmentses, Set<Jobs> jobses, Set<Orders> orderses, Set<UserDepartment> userDepartments, Set<Colors> colorses, Set<Customers> customerses, Set<Equipment> equipments, Set<TemplateParameters> templateParameterses, Set<NoteGroups> noteGroupses, Set<StatusCod> statusCods, Set<Events> eventses, Set<Threads> threadses, Set<ReportSequence> reportSequences, Set<Reports> reportses, Set<Types> typeses, Set<JobsHistory> jobsHistories, Set<RoleAccess> roleAccesses, Set<GroupNotes> groupNoteses, Set<StatusGroup> statusGroups, Set<EventParameters> eventParameterses, Set<Roles> roleses, Set<ParamNames> paramNameses, Set<OrderNote> orderNotes, Set<Notes> noteses, Set<Models> modelses) {
         this.id = id;
         this.statusCod = statusCod;
+        this.languages = languages;
         this.login = login;
         this.password = password;
         this.note = note;
@@ -130,6 +132,16 @@ public class Users implements java.io.Serializable {
 
     public void setStatusCod(StatusCod statusCod) {
         this.statusCod = statusCod;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_lang")
+    public Languages getLanguages() {
+        return this.languages;
+    }
+
+    public void setLanguages(Languages languages) {
+        this.languages = languages;
     }
 
     @Column(name = "login", unique = true, nullable = false, length = 50)

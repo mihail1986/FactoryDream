@@ -6,7 +6,7 @@
 package md.factorydream.spring.dao;
 
 import java.util.List;
-import md.factorydream.entites.Models;
+import md.factorydream.entites.Types;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,21 +14,21 @@ import org.springframework.stereotype.Repository;
  * @author Zaițev.Victor
  */
 @Repository
-public class ModelsDAOImpl extends AbstractSpringDao implements ModelsDAO {
+public class TypesDAOImpl extends AbstractSpringDao implements TypesDAO {
 
     @Override
-    public void save(Models models) {
-        super.saveOrUpdate(models);
+    public void save(Types types) {
+        super.saveOrUpdate(types);
     }
 
     @Override
     public List findAll() {
-        return super.findAll(Models.class);
+        return super.findAll(Types.class);
     }
 
     @Override
-    public List findAllEnableModels() {
-        return super.findAllDataEnableObject(Models.class);
+    public List findAllEnableTypes() {
+        return super.findAllDataEnableObject(Types.class);
     }
 
 }

@@ -6,19 +6,19 @@
 package md.factorydream.spring.service;
 
 import java.util.List;
-import md.factorydream.entites.Customers;
+import md.factorydream.entites.Threads;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface CustomersService {
+public interface ThreadsService {
 
-    public void save(Customers customers);
+    public void save(Threads threads);
 
     public List findAll();
 
-    public List findAllEnableCustomers();
+    public List findAllEnableThreads();
 
-    public List findAllEnableCustomersRest();
+    public List findAllEnableThreadsRest();
 }

@@ -59,7 +59,7 @@ public class OrdersServiceImpl implements OrdersService {
             Set<OrderNotesRestValue> orderNotesRest = new HashSet<>();
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
-                OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getId(), orderParameters.getParamNames().getName(), orderParameters.getValue());
+                OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
                 orderParametersSet.add(orderParametersRestValue);
             }
 
@@ -90,7 +90,7 @@ public class OrdersServiceImpl implements OrdersService {
             Set<OrderNotesRestValue> orderNotesRest = new HashSet<>();
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
-                OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getId(), orderParameters.getParamNames().getName(), orderParameters.getValue());
+                OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
                 orderParametersSet.add(orderParametersRestValue);
             }
 

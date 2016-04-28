@@ -6,19 +6,19 @@
 package md.factorydream.spring.service;
 
 import java.util.List;
-import md.factorydream.entites.Customers;
+import md.factorydream.entites.Types;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface CustomersService {
+public interface TypesService {
 
-    public void save(Customers customers);
+    public void save(Types types);
 
     public List findAll();
 
-    public List findAllEnableCustomers();
+    public List findAllEnableTypes();
 
-    public List findAllEnableCustomersRest();
+    public List findAllEnableTypesRest();
 }

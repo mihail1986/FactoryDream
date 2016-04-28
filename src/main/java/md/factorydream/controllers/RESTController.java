@@ -13,18 +13,27 @@ import md.factorydream.constant.AccessNameConst;
 import md.factorydream.entites.Customers;
 import md.factorydream.entites.Employees;
 import md.factorydream.entites.RoleAccess;
+import md.factorydream.entites.rest.ColorsValueRest;
+import md.factorydream.entites.rest.CustomersValueRest;
+import md.factorydream.entites.rest.DiametersValueRest;
 import md.factorydream.entites.rest.ModelValueRest;
 import md.factorydream.entites.rest.OrdersRest;
+import md.factorydream.entites.rest.ThreadsValueRest;
+import md.factorydream.entites.rest.TypesValueRest;
+import md.factorydream.spring.service.ColorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import md.factorydream.spring.service.CustomersService;
+import md.factorydream.spring.service.DiametersService;
 import md.factorydream.spring.service.EmployeesService;
 import md.factorydream.spring.service.ModelsService;
 import md.factorydream.spring.service.OrdersService;
 import md.factorydream.spring.service.RoleAccessSevice;
+import md.factorydream.spring.service.ThreadsService;
+import md.factorydream.spring.service.TypesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -57,11 +66,30 @@ public class RESTController {
     @Qualifier(value = "roleAccessSevice")
     private RoleAccessSevice roleAccessSevice;
 
-    
     //Models Service which will do all data retrieval/manipulation work
     @Autowired
     @Qualifier(value = "modelsService")
     private ModelsService modelsService;
+
+    //Types Service which will do all data retrieval/manipulation work
+    @Autowired
+    @Qualifier(value = "typesService")
+    private TypesService typesService;
+
+    //Diameters Service which will do all data retrieval/manipulation work
+    @Autowired
+    @Qualifier(value = "diametersService")
+    private DiametersService diametersService;
+
+    //Threads Service which will do all data retrieval/manipulation work
+    @Autowired
+    @Qualifier(value = "threadsService")
+    private ThreadsService threadsService;
+
+    //Colors Service which will do all data retrieval/manipulation work
+    @Autowired
+    @Qualifier(value = "colorsService")
+    private ColorsService colorsService;
 
     //------------------------ Retrieve All Orders ------------------------------------------------------ 
     @RequestMapping(value = "/rest/orders", method = RequestMethod.GET)
@@ -110,6 +138,51 @@ public class RESTController {
         List<ModelValueRest> modeValueRestList = (ArrayList<ModelValueRest>) modelsService.findAllEnableModelsRest();
 
         return new ResponseEntity<>(modeValueRestList, HttpStatus.OK);
+    }
+
+    //---------------------- Retrieve All Value of Customers -----------------------------------------------
+    @RequestMapping(value = "/rest/valueCustomers", method = RequestMethod.GET)
+    public ResponseEntity<List<CustomersValueRest>> getAllValueCustomers() {
+
+        List<CustomersValueRest> customersValueRestList = (ArrayList<CustomersValueRest>) customersService.findAllEnableCustomersRest();
+
+        return new ResponseEntity<>(customersValueRestList, HttpStatus.OK);
+    }
+
+    //---------------------- Retrieve All Value of Types --------------------------------------------------
+    @RequestMapping(value = "/rest/valueTypes", method = RequestMethod.GET)
+    public ResponseEntity<List<TypesValueRest>> getAllValueTypes() {
+
+        List<TypesValueRest> typesValueRestList = (ArrayList<TypesValueRest>) typesService.findAllEnableTypesRest();
+
+        return new ResponseEntity<>(typesValueRestList, HttpStatus.OK);
+    }
+
+    //---------------------- Retrieve All Value of Diameters --------------------------------------------------
+    @RequestMapping(value = "/rest/valueDiameters", method = RequestMethod.GET)
+    public ResponseEntity<List<DiametersValueRest>> getAllValueDiameters() {
+
+        List<DiametersValueRest> diametersValueRestList = (ArrayList<DiametersValueRest>) diametersService.findAllEnableDiametersRest();
+
+        return new ResponseEntity<>(diametersValueRestList, HttpStatus.OK);
+    }
+
+    //---------------------- Retrieve All Value of Threads --------------------------------------------------
+    @RequestMapping(value = "/rest/valueThreads", method = RequestMethod.GET)
+    public ResponseEntity<List<ThreadsValueRest>> getAllValueThreads() {
+
+        List<ThreadsValueRest> threadsValueRestList = (ArrayList<ThreadsValueRest>) threadsService.findAllEnableThreadsRest();
+
+        return new ResponseEntity<>(threadsValueRestList, HttpStatus.OK);
+    }
+
+    //---------------------- Retrieve All Value of Colors --------------------------------------------------
+    @RequestMapping(value = "/rest/valueColors", method = RequestMethod.GET)
+    public ResponseEntity<List<ColorsValueRest>> getAllValueColors() {
+
+        List<ColorsValueRest> colorsValueRestList = (ArrayList<ColorsValueRest>) colorsService.findAllEnableColorsRest();
+
+        return new ResponseEntity<>(colorsValueRestList, HttpStatus.OK);
     }
 
 }

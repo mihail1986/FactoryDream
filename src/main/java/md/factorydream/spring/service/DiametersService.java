@@ -6,19 +6,19 @@
 package md.factorydream.spring.service;
 
 import java.util.List;
-import md.factorydream.entites.Customers;
+import md.factorydream.entites.Diameters;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface CustomersService {
+public interface DiametersService {
 
-    public void save(Customers customers);
+    public void save(Diameters diameters);
 
     public List findAll();
 
-    public List findAllEnableCustomers();
+    public List findAllEnableDiameters();
 
-    public List findAllEnableCustomersRest();
+    public List findAllEnableDiametersRest();
 }

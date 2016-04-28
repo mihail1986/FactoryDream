@@ -11,26 +11,16 @@ package md.factorydream.entites.rest;
  */
 public class OrderParametersRestValue {
     
-    private long paramId;
     private String paramName;
     private String paramValue;
 
     public OrderParametersRestValue(){}
     
-    public OrderParametersRestValue(long paramId, String paramName, String paramValue) {
-        this.paramId = paramId;
+    public OrderParametersRestValue(String paramName, String paramValue) {
         this.paramName = paramName;
         this.paramValue = paramValue;
     }
     
-    public long getParamId() {
-        return paramId;
-    }
-
-    public void setParamId(long paramId) {
-        this.paramId = paramId;
-    }
-
     public String getParamValue() {
         return paramValue;
     }

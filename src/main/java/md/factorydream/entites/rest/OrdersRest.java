@@ -33,6 +33,23 @@ public class OrdersRest {
     private Set<OrderNotesRestValue> orderNotes = new HashSet<>();
 
      public OrdersRest(){}
+     
+    public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate) {
+        this.id = id;
+        this.color = colorId;
+        this.customer = customerId;
+        this.diameter = diameterId;
+        this.model = modelId;
+        this.status = statusId;
+        this.thread = threadId;
+        this.type = typeId;
+        this.orderData = orderData;
+        this.orderIdentifier = orderIdentifier;
+        this.quantity = quantity;
+        this.delivery = delivery;
+        this.distributionDate = distributionDate;
+        this.lastUpdateDate = lastUpdateDate;
+    }
     
     public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, Set<OrderNotesRestValue> orderNotes) {
         this.id = id;
@@ -52,7 +69,8 @@ public class OrdersRest {
         this.orderParameterses = orderParameterses;
         this.orderNotes = orderNotes;
     }
-  
+ 
+    
     public long getId() {
         return id;
     }

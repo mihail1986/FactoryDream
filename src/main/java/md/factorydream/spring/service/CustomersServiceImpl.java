@@ -5,9 +5,11 @@
  */
 package md.factorydream.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import md.factorydream.entites.Customers;
+import md.factorydream.entites.rest.CustomersValueRest;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,29 @@ public class CustomersServiceImpl implements CustomersService {
     @Transactional
     public List findAll() {
         return customersDAO.findAll();
+    }
+
+    @Override
+    @Transactional
+    public List findAllEnableCustomers() {
+        return customersDAO.findAllEnableCustomers();
+    }
+
+    @Override
+    public List findAllEnableCustomersRest() {
+
+        List customersValueRestList = new ArrayList();
+
+        List customersList = findAllEnableCustomers();
+
+        for (Object customers : customersList) {
+            Customers customer = (Customers) customers;
+
+            CustomersValueRest customersValuelRest = new CustomersValueRest(customer.getId(), customer.getName());
+            customersValueRestList.add(customersValuelRest);
+        }
+
+        return customersValueRestList;
     }
 
 }
