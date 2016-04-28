@@ -20,7 +20,7 @@
                 <div class="tablecontainer">
 
                     <div>
-                        <div id="grid" ui-grid="myData" ui-grid-edit class="grid"></div>
+                        <div id="grid" ui-grid="myData" ui-grid-edit ui-grid-row-edit ui-grid-cellNav class="grid"></div>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,7 @@
 </div>
 
 <script src="js/angular.1.4.9/angular.min.js"></script>
+<script src="js/angular.1.4.9/angular-resource.min.js"></script>
 <script src="js/angular.1.4.9/angular-touch.min.js"></script>
 <script src="js/angular.1.4.9/angular-animate.min.js"></script>
 <script src="js/uiGridv3.1.1/grunt-scripts/csv.js"></script>

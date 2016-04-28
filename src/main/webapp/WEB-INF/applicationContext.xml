@@ -84,6 +84,8 @@
                 <value>md.factorydream.entites.ParamNames</value>
                 <value>md.factorydream.entites.Customers</value>
                 <value>md.factorydream.entites.Employees</value>
+                <value>md.factorydream.entites.Languages</value>
+                <value>md.factorydream.entites.TranslateDictionary</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -159,5 +161,44 @@
     <bean id="modelsService" class="md.factorydream.spring.service.ModelsServiceImpl">
         <property name="modelsDAO" ref="modelsDAO"></property>        
     </bean>
+    
+    <bean id="typesDAO" class="md.factorydream.spring.dao.TypesDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="typesService" class="md.factorydream.spring.service.TypesServiceImpl">
+        <property name="typesDAO" ref="typesDAO"></property>        
+    </bean>
+    
+    
+    <bean id="diametersDAO" class="md.factorydream.spring.dao.DiametersDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="diametersService" class="md.factorydream.spring.service.DiametersServiceImpl">
+        <property name="diametersDAO" ref="diametersDAO"></property>        
+    </bean>
+    
+    
+    <bean id="threadsDAO" class="md.factorydream.spring.dao.ThreadsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="threadsService" class="md.factorydream.spring.service.ThreadsServiceImpl">
+        <property name="threadsDAO" ref="threadsDAO"></property>        
+    </bean>
+    
+    
+    
+    
+    <bean id="colorsDAO" class="md.factorydream.spring.dao.ColorsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="colorsService" class="md.factorydream.spring.service.ColorsServiceImpl">
+        <property name="colorsDAO" ref="colorsDAO"></property>        
+    </bean>
+    
+    
     
 </beans>
