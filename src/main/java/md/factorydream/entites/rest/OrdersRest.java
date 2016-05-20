@@ -8,6 +8,10 @@ package md.factorydream.entites.rest;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -15,25 +19,66 @@ import java.util.Set;
  */
 public class OrdersRest {
 
+    @NotNull
+    @Min(0)
     private long id;
-    private int color;
-    private long customer;
-    private int diameter;
-    private int model;
-    private int status;
-    private int thread;
-    private int type;
-    private Date orderData;
-    private String orderIdentifier;
-    private int quantity;
-    private Date delivery;
-    private Date distributionDate;
-    private Date lastUpdateDate;
-    private Set<OrderParametersRestValue> orderParameterses = new HashSet<>();
-    private Set<OrderNotesRestValue> orderNotes = new HashSet<>();
 
-     public OrdersRest(){}
-     
+    @NotNull
+    @Min(1)
+    private int color;
+
+    @NotNull
+    @Min(1)
+    private long customer;
+
+    @NotNull
+    @Min(1)
+    private int diameter;
+
+    @NotNull
+    @Min(1)
+    private int model;
+
+    @NotNull
+    @Min(1)
+    private int status;
+
+    @NotNull
+    @Min(1)
+    private int thread;
+
+    @NotNull
+    @Min(1)
+    private int type;
+
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @NotNull
+    private Date orderData;
+
+    @Pattern(regexp = "(\\d){1,6}\\/(\\d){2,4}")
+    private String orderIdentifier;
+
+    @NotNull
+    @Min(1)
+    private int quantity;
+
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @NotNull
+    private Date delivery;
+
+    private Date distributionDate;
+
+    private Date lastUpdateDate;
+
+    @NotNull
+    @Min(0)
+    private long orderNotes;
+    private Set<OrderParametersRestValue> orderParameterses = new HashSet<>();
+//    private Set<OrderNotesRestValue> orderNotes = new HashSet<>();
+
+    public OrdersRest() {
+    }
+
     public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate) {
         this.id = id;
         this.color = colorId;
@@ -50,8 +95,8 @@ public class OrdersRest {
         this.distributionDate = distributionDate;
         this.lastUpdateDate = lastUpdateDate;
     }
-    
-    public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, Set<OrderNotesRestValue> orderNotes) {
+
+    public OrdersRest(long id, int colorId, long customerId, int diameterId, int modelId, int statusId, int threadId, int typeId, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, long orderNotes) {
         this.id = id;
         this.color = colorId;
         this.customer = customerId;
@@ -69,8 +114,7 @@ public class OrdersRest {
         this.orderParameterses = orderParameterses;
         this.orderNotes = orderNotes;
     }
- 
-    
+
     public long getId() {
         return id;
     }
@@ -191,13 +235,12 @@ public class OrdersRest {
         this.orderParameterses = orderParameterses;
     }
 
-    public Set<OrderNotesRestValue> getOrderNotes() {
+    public long getOrderNotes() {
         return orderNotes;
     }
 
-    public void setOrderNotes(Set<OrderNotesRestValue> orderNotes) {
+    public void setOrderNotes(long orderNotes) {
         this.orderNotes = orderNotes;
     }
 
-   
 }

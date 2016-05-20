@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import md.factorydream.entites.OrderNote;
 import md.factorydream.entites.OrderParameters;
 import md.factorydream.entites.Orders;
-import md.factorydream.entites.rest.OrderNotesRestValue;
 import md.factorydream.entites.rest.OrderParametersRestValue;
 import md.factorydream.entites.rest.OrderRestReadOnly;
 import md.factorydream.entites.rest.OrdersRest;
 import md.factorydream.spring.dao.OrdersDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrdersServiceImpl implements OrdersService {
 
     private OrdersDAO ordersDAO;
+    
+    @Autowired
+    @Qualifier(value = "ordersNoteService")
+    private OrdersNoteService ordersNoteService;
 
     public void setOrdersDAO(OrdersDAO ordersDAO) {
         this.ordersDAO = ordersDAO;
@@ -48,7 +52,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List findAllOrdersRest() {
         List ordersRestList = new ArrayList();
-
+        
         List ordersList = findAll();
 
         for (Object orders : ordersList) {
@@ -56,19 +60,15 @@ public class OrdersServiceImpl implements OrdersService {
             Orders order = (Orders) orders;
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
-            Set<OrderNotesRestValue> orderNotesRest = new HashSet<>();
+            
+            long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
                 OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
                 orderParametersSet.add(orderParametersRestValue);
             }
 
-            for (OrderNote orderNote : order.getOrderNotes()) {
-                OrderNotesRestValue orderNotesRestValue = new OrderNotesRestValue(orderNote.getGroupNotes().getId(), orderNote.getGroupNotes().getNotes().getId(), orderNote.getGroupNotes().getNoteGroups().getName(), orderNote.getGroupNotes().getNotes().getNote());
-                orderNotesRest.add(orderNotesRestValue);
-            }
-
-            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getStatuses().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesRest);
+            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getStatuses().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesCount);
 
             ordersRestList.add(ordersRest);
 
@@ -87,16 +87,12 @@ public class OrdersServiceImpl implements OrdersService {
             Orders order = (Orders) orders;
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
-            Set<OrderNotesRestValue> orderNotesRest = new HashSet<>();
+            
+            long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
                 OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
                 orderParametersSet.add(orderParametersRestValue);
-            }
-
-            for (OrderNote orderNote : order.getOrderNotes()) {
-                OrderNotesRestValue orderNotesRestValue = new OrderNotesRestValue(orderNote.getGroupNotes().getId(), orderNote.getGroupNotes().getNotes().getId(), orderNote.getGroupNotes().getNoteGroups().getName(), orderNote.getGroupNotes().getNotes().getNote());
-                orderNotesRest.add(orderNotesRestValue);
             }
 
             OrderRestReadOnly orderRestReadOnly = new OrderRestReadOnly(
@@ -105,7 +101,7 @@ public class OrdersServiceImpl implements OrdersService {
                     order.getCustomers().getName(),
                     order.getDiameters().getValue(),
                     order.getModels().getValue(),
-                    order.getStatusCod().getCodName(),
+                    order.getStatusCod().getStatuses().getName(),
                     order.getThreads().getValue(),
                     order.getTypes().getValue(),
                     order.getOrderData(),
@@ -115,7 +111,7 @@ public class OrdersServiceImpl implements OrdersService {
                     order.getDistributionDate(),
                     order.getLastUpdateDate(),
                     orderParametersSet,
-                    orderNotesRest);
+                    orderNotesCount);
             
             ordersRestReadonlyList.add(orderRestReadOnly);
         }

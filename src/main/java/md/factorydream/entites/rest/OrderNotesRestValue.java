@@ -55,8 +55,5 @@ public class OrderNotesRestValue {
     public void setNoteValue(String noteValue) {
         this.noteValue = noteValue;
     }
-
-  
-    
     
 }

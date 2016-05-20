@@ -9,21 +9,21 @@ package md.factorydream.entites.rest;
  *
  * @author Zaițev.Victor
  */
-public class CustomersValueRest {
+public class StatusCodeRest {
 
-    private long id;
+    private short id;
     private String value;
 
-    public CustomersValueRest(long id, String value) {
+    public StatusCodeRest(short id, String value) {
         this.id = id;
         this.value = value;
     }
 
-    public long getId() {
+    public short getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(short id) {
         this.id = id;
     }
 

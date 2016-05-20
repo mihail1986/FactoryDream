@@ -22,6 +22,8 @@
     <mvc:annotation-driven/>
     
     <context:component-scan base-package="md.factorydream.controllers"/>
+    <context:component-scan base-package="md.factorydream.controllers.rest"/>
+    <context:component-scan base-package="md.factorydream.controllers.request"/>
     <context:component-scan base-package="md.factorydream.repository"/>
     <context:component-scan base-package="md.factorydream.spring.dao"/>
     <context:component-scan base-package="md.factorydream.spring.service"/>

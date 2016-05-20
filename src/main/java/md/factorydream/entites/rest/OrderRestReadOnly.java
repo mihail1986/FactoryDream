@@ -30,9 +30,9 @@ public class OrderRestReadOnly {
     private Date distributionDate;
     private Date lastUpdateDate;
     private Set<OrderParametersRestValue> orderParameterses = new HashSet<>();
-    private Set<OrderNotesRestValue> orderNotes = new HashSet<>();
+    private long orderNotes;
 
-    public OrderRestReadOnly(long id, String color, String customer, String diameter, String model, String status, String thread, String type, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, Set<OrderNotesRestValue> orderNotes) {
+    public OrderRestReadOnly(long id, String color, String customer, String diameter, String model, String status, String thread, String type, Date orderData, String orderIdentifier, int quantity, Date delivery, Date distributionDate, Date lastUpdateDate, Set<OrderParametersRestValue> orderParameterses, long orderNotes) {
         this.id = id;
         this.color = color;
         this.customer = customer;
@@ -171,11 +171,11 @@ public class OrderRestReadOnly {
         this.orderParameterses = orderParameterses;
     }
 
-    public Set<OrderNotesRestValue> getOrderNotes() {
+    public long getOrderNotes() {
         return orderNotes;
     }
 
-    public void setOrderNotes(Set<OrderNotesRestValue> orderNotes) {
+    public void setOrderNotes(long orderNotes) {
         this.orderNotes = orderNotes;
     }
 

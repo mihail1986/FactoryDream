@@ -188,9 +188,6 @@
         <property name="threadsDAO" ref="threadsDAO"></property>        
     </bean>
     
-    
-    
-    
     <bean id="colorsDAO" class="md.factorydream.spring.dao.ColorsDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
@@ -200,5 +197,22 @@
     </bean>
     
     
+    <bean id="orderNoteDAO" class="md.factorydream.spring.dao.OrderNoteDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    
+    <bean id="ordersNoteService" class="md.factorydream.spring.service.OrdersNoteServiceImpl">
+        <property name="orderNoteDAO" ref="orderNoteDAO"></property>        
+    </bean> 
+    
+    
+    <bean id="statusCodDAO" class="md.factorydream.spring.dao.StatusCodDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="statusCodService" class="md.factorydream.spring.service.StatusCodServiceImpl">
+        <property name="statusCodDAO" ref="statusCodDAO"></property>
+    </bean>
     
 </beans>

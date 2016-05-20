@@ -1,7 +1,17 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Document   : color_service.js
+ *  Created on : Mai 20, 2016, 
+ *  Author     : Mihail.Cepraga
  */
-
-
+'use strict';
+ 
+angular.module('ordersApp').factory('colorService', ['$resource', function($resource){
+ 
+    return {
+            Colors: function (){
+                return $resource("/FactoryDream/rest/valueColors",{},{
+                    query:{ method: "GET", isArray: true }
+                });
+            }
+        }; 
+}]);  

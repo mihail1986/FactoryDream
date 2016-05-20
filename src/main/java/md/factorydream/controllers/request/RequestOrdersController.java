@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package md.factorydream.controllers;
+package md.factorydream.controllers.request;
 
+import javax.validation.Valid;
 import md.factorydream.entites.rest.OrdersRest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Zaițev.Victor
  */
 @RestController
-public class RequestJsonController {
+public class RequestOrdersController {
 
     //------------------- Save a Orders --------------------------------------------------------
     @RequestMapping(value = "/save/orders", method = RequestMethod.POST)
-    public ResponseEntity<OrdersRest> createUser(@RequestBody OrdersRest ordersRest) {
+    public ResponseEntity<OrdersRest> createUser(@Valid @RequestBody OrdersRest ordersRest, BindingResult bindingResult) {
 
+        if (bindingResult.hasFieldErrors()) {
+            System.out.println(" Zaitev Victor ");
+            System.out.println(" Zaitev " +bindingResult.getFieldError().getField());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         System.out.println(" Orders Id " + ordersRest.getId());
         System.out.println(" colorName " + ordersRest.getColor());
         System.out.println(" customerName " + ordersRest.getCustomer());
@@ -39,7 +46,7 @@ public class RequestJsonController {
         System.out.println(" distributionDate " + ordersRest.getDistributionDate());
         System.out.println(" lastUpdateDate " + ordersRest.getLastUpdateDate());
         System.out.println(" OrderParametersRestValue " + ordersRest.getOrderParameterses());
-        System.out.println(" OrderNotesRestValue " + ordersRest.getOrderNotes());
+        System.out.println(" OrderNotes " + ordersRest.getOrderNotes());
 
         return new ResponseEntity<>(ordersRest, HttpStatus.OK);
 

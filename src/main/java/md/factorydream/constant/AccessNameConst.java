@@ -15,7 +15,4 @@ public class AccessNameConst {
     public static final String ACCESS_NAME_UPDATE = "update";
     public static final String ACCESS_NAME_INSERT = "insert";
     public static final String ACCESS_NAME_FULL = "full";
-    
-    
-    
 }
