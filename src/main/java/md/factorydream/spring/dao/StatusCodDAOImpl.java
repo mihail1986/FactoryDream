@@ -36,7 +36,7 @@ public class StatusCodDAOImpl extends AbstractSpringDao implements StatusCodDAO 
         Query query = session.createQuery(" FROM StatusCod "
                 + " WHERE statusGroup.id=:GroupID ");
 
-        query.setLong("GroupID", groupId);
+        query.setShort("GroupID", groupId);
 
         List list = query.list();
 

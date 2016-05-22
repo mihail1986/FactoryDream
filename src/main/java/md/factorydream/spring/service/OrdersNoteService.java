@@ -21,4 +21,8 @@ public interface OrdersNoteService {
     public List findAllEnableOrderNotes();
 
     public long countNotesPerOrder(long orderId);
+
+    public List findOrderNoteByOrderId(long orderId);
+
+    public List findOrderNoteRestByOrderId(long orderId);
 }

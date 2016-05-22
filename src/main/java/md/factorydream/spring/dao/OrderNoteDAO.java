@@ -13,13 +13,14 @@ import md.factorydream.entites.OrderNote;
  * @author Mihail.Cepraga
  */
 public interface OrderNoteDAO {
-    
+
     public void save(OrderNote OrderNote);
 
     public List findAll();
 
     public List findAllEnableOrderNotes();
-    
+
     public long countNotesPerOrder(long orderId);
-    
+
+    public List findOrderNoteByOrderId(long orderId);
 }

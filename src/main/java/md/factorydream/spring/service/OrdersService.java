@@ -7,18 +7,24 @@ package md.factorydream.spring.service;
 
 import java.util.List;
 import md.factorydream.entites.Orders;
+import md.factorydream.entites.Users;
+import md.factorydream.entites.rest.OrdersRest;
 
 /**
  *
  * @author Mihail.Cepraga
  */
 public interface OrdersService {
-    
+
     public void save(Orders orders);
 
     public List findAll();
-    
+
     public List findAllOrdersRest();
-    
+
     public List findAllOrdersRestReadOnly();
+
+    public boolean save(OrdersRest ordersRest, Users users);
+    
+    
 }

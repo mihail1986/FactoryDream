@@ -35,24 +35,38 @@ public class OrderNoteDAOImpl extends AbstractSpringDao implements OrderNoteDAO 
 
     @Override
     public long countNotesPerOrder(long orderId) {
-        
+
         long OrderNotesCount = 0;
-        
+
         Session session = this.sessionFactory.getCurrentSession();
 
         Query query = session.createQuery(" FROM OrderNote "
-                                            + " WHERE orders.id=:OrderID");
+                + " WHERE orders.id=:OrderID");
 
         query.setLong("OrderID", orderId);
-        
-        
+
         List list = query.list();
-        
+
         if (list != null && list.size() > 0) {
             OrderNotesCount = (long) list.size();
         }
-        
-        return OrderNotesCount; 
+
+        return OrderNotesCount;
     }
-    
+
+    @Override
+    public List findOrderNoteByOrderId(long orderId) {
+        Session session = this.sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery(" FROM OrderNote "
+                + " WHERE orders.id=:OrderID");
+
+        query.setLong("OrderID", orderId);
+
+        List list = query.list();
+
+        return list;
+
+    }
+
 }

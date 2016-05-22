@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import md.factorydream.entites.OrderParameters;
 import md.factorydream.entites.Orders;
+import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.OrderParametersRestValue;
 import md.factorydream.entites.rest.OrderRestReadOnly;
 import md.factorydream.entites.rest.OrdersRest;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrdersServiceImpl implements OrdersService {
 
     private OrdersDAO ordersDAO;
-    
+
     @Autowired
     @Qualifier(value = "ordersNoteService")
     private OrdersNoteService ordersNoteService;
@@ -52,7 +53,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List findAllOrdersRest() {
         List ordersRestList = new ArrayList();
-        
+
         List ordersList = findAll();
 
         for (Object orders : ordersList) {
@@ -60,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
             Orders order = (Orders) orders;
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
-            
+
             long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
@@ -87,7 +88,7 @@ public class OrdersServiceImpl implements OrdersService {
             Orders order = (Orders) orders;
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
-            
+
             long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
@@ -112,11 +113,22 @@ public class OrdersServiceImpl implements OrdersService {
                     order.getLastUpdateDate(),
                     orderParametersSet,
                     orderNotesCount);
-            
+
             ordersRestReadonlyList.add(orderRestReadOnly);
         }
 
         return ordersRestReadonlyList;
+    }
+
+    @Override
+    @Transactional
+    public boolean save(OrdersRest ordersRest, Users users) {
+
+        System.out.println("User Id" + users.getId());
+        if (ordersRest.getId() <= 0) {
+            return ordersDAO.insert(ordersRest, users);
+        }
+        return ordersDAO.update(ordersRest, users);
     }
 
 }

@@ -5,8 +5,10 @@
  */
 package md.factorydream.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import md.factorydream.entites.OrderNote;
+import md.factorydream.entites.rest.OrderNoteRest;
 import md.factorydream.spring.dao.OrderNoteDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,4 +50,29 @@ public class OrdersNoteServiceImpl implements OrdersNoteService {
         return orderNoteDAO.countNotesPerOrder(orderId);
     }
 
+    @Override
+    @Transactional
+    public List findOrderNoteByOrderId(long orderId) {
+        return orderNoteDAO.findOrderNoteByOrderId(orderId);
+    }
+
+    @Override
+    @Transactional
+    public List findOrderNoteRestByOrderId(long orderId) {
+        List orderNotesRestList = new ArrayList();
+
+        List ordersNoteList = findOrderNoteByOrderId(orderId);
+
+        for (Object orderNotes : ordersNoteList) {
+            OrderNote orderNote = (OrderNote) orderNotes;
+
+            String nameGroups = orderNote.getGroupNotes().getNoteGroups().getName();
+            String note = orderNote.getGroupNotes().getNotes().getNote();
+
+            OrderNoteRest orderNoteRest = new OrderNoteRest(nameGroups, note);
+            orderNotesRestList.add(orderNoteRest);
+        }
+
+        return orderNotesRestList;
+    }
 }
