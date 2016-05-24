@@ -11,12 +11,16 @@ package md.factorydream.entites.rest;
  */
 public class OrderNoteRest {
 
+    private long id;
     private String nameGroups;
     private String note;
+    private String firstName;
 
-    public OrderNoteRest(String nameGroups, String note) {
+    public OrderNoteRest(long id, String nameGroups, String note, String firstName) {
+        this.id = id;
         this.nameGroups = nameGroups;
         this.note = note;
+        this.firstName = firstName;
     }
 
     public String getNameGroups() {
@@ -33,6 +37,22 @@ public class OrderNoteRest {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

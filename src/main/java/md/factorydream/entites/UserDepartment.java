@@ -22,14 +22,16 @@ public class UserDepartment implements java.io.Serializable {
     private int id;
     private Departments departments;
     private Users users;
+    private Employees employees;
 
     public UserDepartment() {
     }
 
-    public UserDepartment(int id, Departments departments, Users users) {
+    public UserDepartment(int id, Departments departments, Users users, Employees employees) {
         this.id = id;
         this.departments = departments;
         this.users = users;
+        this.employees = employees;
     }
 
     @Id
@@ -61,6 +63,16 @@ public class UserDepartment implements java.io.Serializable {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_employee", nullable = false)
+    public Employees getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
     }
 
 }

@@ -41,6 +41,7 @@ public class Employees implements java.io.Serializable {
     private Set<JobsHistory> jobsHistories = new HashSet<JobsHistory>(0);
     private Set<Departments> departmentses = new HashSet<Departments>(0);
     private Set<EmployeesJobs> employeesJobses = new HashSet<EmployeesJobs>(0);
+    private Set<UserDepartment> userDepartments = new HashSet<UserDepartment>(0);
 
     public Employees() {
     }
@@ -54,7 +55,7 @@ public class Employees implements java.io.Serializable {
         this.hireDate = hireDate;
     }
 
-    public Employees(int id, Employees employees, StatusCod statusCod, Users users, String firstName, String lastName, Date birthDate, String email, String address, String phonenumber, Date hireDate, String note, Date lastUpdateDate, Set<Employees> employeeses, Set<JobsHistory> jobsHistories, Set<Departments> departmentses, Set<EmployeesJobs> employeesJobses) {
+    public Employees(int id, Employees employees, StatusCod statusCod, Users users, String firstName, String lastName, Date birthDate, String email, String address, String phonenumber, Date hireDate, String note, Date lastUpdateDate, Set<Employees> employeeses, Set<JobsHistory> jobsHistories, Set<Departments> departmentses, Set<EmployeesJobs> employeesJobses, Set<UserDepartment> userDepartments) {
         this.id = id;
         this.employees = employees;
         this.statusCod = statusCod;
@@ -72,6 +73,7 @@ public class Employees implements java.io.Serializable {
         this.jobsHistories = jobsHistories;
         this.departmentses = departmentses;
         this.employeesJobses = employeesJobses;
+        this.userDepartments = userDepartments;
     }
 
     @Id
@@ -233,6 +235,15 @@ public class Employees implements java.io.Serializable {
 
     public void setEmployeesJobses(Set<EmployeesJobs> employeesJobses) {
         this.employeesJobses = employeesJobses;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employees")
+    public Set<UserDepartment> getUserDepartments() {
+        return userDepartments;
+    }
+
+    public void setUserDepartments(Set<UserDepartment> userDepartments) {
+        this.userDepartments = userDepartments;
     }
 
 }
