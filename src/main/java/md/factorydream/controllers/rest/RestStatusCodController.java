@@ -32,9 +32,9 @@ public class RestStatusCodController {
 
     //---------------------- Retrieve All Value of Diameters --------------------------------------------------
     @RequestMapping(value = "/rest/statusCodStatuses", method = RequestMethod.GET)
-    public ResponseEntity<List<StatusCodeRest>> getAllValueDiameters(@RequestParam short group) {
+    public ResponseEntity<List<StatusCodeRest>> getAllValueDiameters(@RequestParam short statusCod) {
 
-        List<StatusCodeRest> statusCodeValueRestList = (ArrayList<StatusCodeRest>) statusCodService.findStatusCodByGroupId(group);
+        List<StatusCodeRest> statusCodeValueRestList = (ArrayList<StatusCodeRest>) statusCodService.findStatusCodByGroupId(statusCod);
 
         return new ResponseEntity<>(statusCodeValueRestList, HttpStatus.OK);
     }

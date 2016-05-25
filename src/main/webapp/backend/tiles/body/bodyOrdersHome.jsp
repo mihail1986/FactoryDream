@@ -6,12 +6,25 @@
 
 <div ng-app="ordersApp" ng-controller="ordersController" >
 
-
-    <div class="jumbotron">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+  </div>
+</nav>
+<!--    <div class="jumbotron">
         <div class="container">
             <h1>Here you can found all our orders!!!</h1>
         </div>
-    </div>
+    </div>-->
     <div class="container-fluid">
         <div class="row">
             <div class="panel panel-default">
@@ -34,6 +47,7 @@
 <script src="js/angular.1.4.9/angular-resource.min.js"></script>
 <script src="js/angular.1.4.9/angular-touch.min.js"></script>
 <script src="js/angular.1.4.9/angular-animate.min.js"></script>
+<script src="js/angular.1.4.9/angular-route.min.js"></script>
 <script src="js/uiGridv3.1.1/grunt-scripts/csv.js"></script>
 <script src="js/uiGridv3.1.1/grunt-scripts/vfs_fonts.js"></script>
 <script src="js/uiGridv3.1.1/ui-grid.min.js"></script>
@@ -45,4 +59,5 @@
 <script src="js/scripts/services/diameter_service.js"></script>
 <script src="js/scripts/services/customer_service.js"></script>
 <script src="js/scripts/services/thread_service.js"></script>
+<script src="js/scripts/services/status_service.js"></script>
 <script src="js/scripts/controllers/orders_controller.js"></script>

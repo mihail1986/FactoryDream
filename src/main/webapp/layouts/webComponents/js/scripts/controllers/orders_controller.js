@@ -4,7 +4,7 @@
  *  Author     : Mihail.Cepraga
  */
 
-angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersService', 'modelService', 'colorService', 'typeService', 'diameterService', 'customerService', 'threadService', function ($scope, ordersService, modelService, colorService, typeService, diameterService, customerService, threadService) {
+angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersService', 'modelService', 'colorService', 'typeService', 'diameterService', 'customerService', 'threadService', 'statusesService', 'uiGridConstants', function ($scope, ordersService, modelService, colorService, typeService, diameterService, customerService, threadService, statusesService, uiGridConstants) {
 
         var self = this;
         self.user_access;
@@ -16,6 +16,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
         $scope.diametersValue = {};
         $scope.customersValue = {};
         $scope.threadsValue = {};
+        $scope.statusesValue = {};
 
         self.fetchAllModelsValue = function () {
             modelService.Models().query().$promise.then(function (result) {
@@ -40,6 +41,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
         self.fetchAllCustomersValue = function () {
             customerService.Customers().query().$promise.then(function (result) {
                 $scope.customersValue = result;
+                console.log($scope.customersValue);
             });
         };
         self.fetchAllThreadsValue = function () {
@@ -47,7 +49,14 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
                 $scope.threadsValue = result;
             });
         };
+        self.fetchAllStatuses = function () {
+            statusesService.Statuses().query({ cod: 4 }).$promise.then(function (result) {
+                $scope.statusesValue = result;
+                console.log($scope.statusesValue);
+            });
+        };
         
+
         self.fetchAllOrders = function () {
             ordersService.Orders().query().$promise.then(function (result) {
                 self.user_access = result[0].userAccess;
@@ -56,19 +65,86 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
             });
         };
         self.initOrderGridColumn = function (userAccess) {
-            if (userAccess === 'full') {
-                $scope.myData.columnDefs = self.fullAccess;
-                $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-                $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-                $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
-                $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
-                $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
-                $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;        
-                $scope.myData.enableGridMenu = true;
-                $scope.myData.enableCellEditOnFocus = true;
-                $scope.myData.enableFiltering = true;
-                $scope.myData.exporterMenuPdf = false;
-                $scope.myData.exporterCsvFilename = 'myFile.csv';
+            
+            switch (userAccess) {
+                case "full":
+                    $scope.myData.columnDefs = self.fullAccess;
+                    $scope.myData.columnDefs[1].editDropdownOptionsArray = $scope.statusesValue;
+                    $scope.myData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
+                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    $scope.myData.columnDefs[3].filter.selectOptions = $scope.customersValue;
+                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.myData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.myData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
+                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.myData.columnDefs[11].filter.selectOptions = $scope.typesValue;
+                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.myData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
+                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.myData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
+                    $scope.myData.enableGridMenu = true;
+                    $scope.myData.enableCellEditOnFocus = true;
+                    $scope.myData.enableFiltering = true;
+                    $scope.myData.exporterMenuPdf = false;
+                    $scope.myData.exporterCsvFilename = 'myFile.csv';
+
+                    break;
+                case "update":
+                    $scope.myData.columnDefs = self.fullAccess;
+                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    
+                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.myData.enableGridMenu = true;
+                    $scope.myData.enableCellEditOnFocus = true;
+                    $scope.myData.enableFiltering = true;
+                    $scope.myData.exporterMenuPdf = false;
+                    $scope.myData.exporterCsvFilename = 'myFile.csv';
+
+                    break;
+                case "insert":
+                    $scope.myData.columnDefs = self.fullAccess;
+                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    
+                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.myData.enableGridMenu = true;
+                    $scope.myData.enableCellEditOnFocus = true;
+                    $scope.myData.enableFiltering = true;
+                    $scope.myData.exporterMenuPdf = false;
+                    $scope.myData.exporterCsvFilename = 'myFile.csv';
+
+                    break;
+                default:
+                    $scope.myData.columnDefs = self.readOnlyAccess;
+                    $scope.myData.enableCellEdit = false;
+                    $scope.myData.enableFiltering = true;
+                    $scope.myData.enableSelectAll = true;
+                    $scope.myData.enableGridMenu = true;
+                    $scope.myData.exporterMenuPdf = false;
+                    break;
+
+            }
+//            if (userAccess === 'full') {
+//                $scope.myData.columnDefs = self.fullAccess;
+//                $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+//                $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+//                $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+//                $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+//                $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+//                $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;        
+//                $scope.myData.enableGridMenu = true;
+//                $scope.myData.enableCellEditOnFocus = true;
+//                $scope.myData.enableFiltering = true;
+//                $scope.myData.exporterMenuPdf = false;
+//                $scope.myData.exporterCsvFilename = 'myFile.csv';
 //        $scope.myData = {
 ////        enableFiltering: true,
 ////        showGridFooter: true,
@@ -110,27 +186,24 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
 ////    exporterCsvFilename: 'myFile.csv'
 //
 //        };
-            } else if (userAccess === 'read') {
-                $scope.myData.columnDefs = self.readOnlyAccess;
-                $scope.myData.enableCellEdit = false;
-                $scope.myData.enableFiltering = true;
-                $scope.myData.enableSelectAll = true;
-                $scope.myData.enableGridMenu = true;
-                $scope.myData.exporterMenuPdf = false;
-                $scope.myData.exporterCsvFilename = 'myFile.csv';
-            }
+//            } else if (userAccess === 'read') {
+//                $scope.myData.columnDefs = self.readOnlyAccess;
+//                $scope.myData.enableCellEdit = false;
+//                $scope.myData.enableFiltering = true;
+//                $scope.myData.enableSelectAll = true;
+//                $scope.myData.enableGridMenu = true;
+//                $scope.myData.exporterMenuPdf = false;
+//                $scope.myData.exporterCsvFilename = 'myFile.csv';
+//            }
         };
-        
+
         $scope.showNotes = function (row) {
             alert(row.entity.orderNotes);
-        };
-        $scope.showStatus = function (row) {
-            alert(row.entity.status);
         };
         $scope.addNewOrder = function () {
             alert('New Order!!!');
         };
-        
+
         $scope.statusNameClass = function (row) {
             if (row.entity.status === 'None') {
                 return "text-muted text-center";
@@ -138,7 +211,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
                 return "text-primary"; // Or even "", which won't add any additional classes to the element
             }
         };
-        
+
         $scope.statusButtonClass = function (row) {
             if (row.entity.status === 1) {
                 return "btn btn-default btn-xs";
@@ -146,57 +219,70 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
                 return "btn btn-danger btn-xs"; // Or even "", which won't add any additional classes to the element
             }
         };
-        
+
         self.fullAccess = [
             {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.showNotes(row)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
-            {name: 'status', displayName: 'Status', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, cellTemplate: '<div class="ui-grid-cell-contents"><button ng-class="grid.appScope.statusButtonClass(row)" ng-click="grid.appScope.showStatus(row)">Status <span class="badge">{{COL_FIELD}}</span></button>&nbsp;</div>', width: 80},
+            {name: 'status', displayName: 'Status', pinnedLeft: true, enableCellEdit: true, enableColumnMenu: false, width: 80
+                ,filter:{type: uiGridConstants.filter.SELECT}
+                , editType: 'dropdown'
+                , editableCellTemplate: 'ui-grid/dropdownEditor'
+                , cellFilter: "griddropdown:grid.appScope.statusesValue:'Inactiv'"
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
+            },
             {name: 'orderData', displayName: 'Data', type: 'date', pinnedLeft: true, cellFilter: 'date:"dd.MM.yyyy"', enableColumnMenu: false, width: 100},
             {name: 'customer', displayName: 'Client', enableColumnMenu: false, enablePinning: false, width: 150
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
                 , cellFilter: "griddropdown:grid.appScope.customersValue:row.entity.customer"
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'Client Order id', displayName: 'Ordin Client', enableColumnMenu: false, visible: false, width: 150},
             {name: 'Symbol', displayName: 'Symbol', enableColumnMenu: false, visible: false, width: 100},
             {name: 'orderIdentifier', displayName: 'Ordin Id', enableColumnMenu: false, width: 80},
             {name: 'model', displayName: 'Model', enableColumnMenu: false, width: 80
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
                 , cellFilter: "griddropdown:grid.appScope.modulesValue:row.entity.model"
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'T', displayName: 'T', enableColumnMenu: false, width: 80},
             {name: 'LB/FT', displayName: 'Lb/Ft', enableColumnMenu: false, width: 80},
             {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
-                , cellFilter: "griddropdown:grid.appScope.diametersValue:row.entity.diameter" 
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , cellFilter: "griddropdown:grid.appScope.diametersValue:row.entity.diameter"
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'type', displayName: 'Tipul', enableColumnMenu: false, width: 90
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
                 , cellFilter: "griddropdown:grid.appScope.typesValue:row.entity.type"
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'thread', displayName: 'Filet', enableColumnMenu: false, width: 150
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
                 , cellFilter: "griddropdown:grid.appScope.threadsValue:row.entity.thread"
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'color', displayName: 'Culoare', enableColumnMenu: false, width: 80
+                ,filter:{type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
                 , cellFilter: "griddropdown:grid.appScope.colorsValue:row.entity.color"
-                , editDropdownIdLabel: 'id'
-                , editDropdownValueLabel: 'value'
+                , editDropdownIdLabel: 'value'
+                , editDropdownValueLabel: 'label'
             },
             {name: 'Vent Hole', displayName: 'Vent.mm', enableColumnMenu: false, width: 80},
             {name: 'OD', displayName: 'OD.mm', enableColumnMenu: false, width: 80},
@@ -204,7 +290,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
             {name: 'delivery', displayName: 'Consegna', type: 'date', cellFilter: 'date:"dd.MM.yyyy"', enableColumnMenu: false, width: 100},
             {name: 'quantity', displayName: 'Q-ty', enableColumnMenu: false, width: 80}
         ];
-        
+
         self.readOnlyAccess = [
             {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.showNotes(row)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
             {name: 'status', displayName: 'Status', pinnedLeft: true, enableColumnMenu: false, cellTemplate: '<div class="ui-grid-cell-contents" ng-class="grid.appScope.statusNameClass(row)" >{{COL_FIELD}}</div>', width: 80},
@@ -243,6 +329,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
             self.fetchAllDiametersValue();
             self.fetchAllCustomersValue();
             self.fetchAllThreadsValue();
+            self.fetchAllStatuses();
             self.fetchAllOrders();
             $scope.myData.data = self.orders;
         };
@@ -363,8 +450,8 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
     return function (input, map, initial) {
         if (typeof map !== "undefined") {
             for (var i = 0; i < map.length; i++) {
-                if (map[i]['id'] === input) {
-                    return map[i]['value'];
+                if (map[i]['value'] === input) {
+                    return map[i]['label'];
                 }
             }
         } else if (initial) {
@@ -372,4 +459,22 @@ angular.module('ordersApp').controller('ordersController', ['$scope', 'ordersSer
         }
         return input;
     };
+}).filter('statusdropdown', function () {
+
+    return function (input, map, initial) {
+        if (typeof map !== "undefined") {
+            for (var i = 0; i < map.length; i++) {
+                if (map[i]['value'] === input) {
+                    return map[i]['label'];
+                }
+            }
+        } else if (initial === 1) {
+            return "None";
+        }
+        return input;
+    };
+}).directive('myCustomDropdown', function() {
+  return {
+    template: '<select class="form-control input-sm"  style="padding-right: 0px; padding-left: 0px;" ng-model="colFilter.term" ng-options="option.id as option.value for option in colFilter.options"></select>'
+  };
 });

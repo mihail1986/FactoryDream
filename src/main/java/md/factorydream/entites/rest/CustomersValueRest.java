@@ -11,28 +11,31 @@ package md.factorydream.entites.rest;
  */
 public class CustomersValueRest {
 
-    private long id;
-    private String value;
+    private long value;
+    private String label;
 
-    public CustomersValueRest(long id, String value) {
-        this.id = id;
+    public CustomersValueRest(long value, String label) {
         this.value = value;
+        this.label = label;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getValue() {
+    public long getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(long value) {
         this.value = value;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    
+  
 
 }

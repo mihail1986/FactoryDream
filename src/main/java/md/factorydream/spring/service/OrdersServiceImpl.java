@@ -69,7 +69,7 @@ public class OrdersServiceImpl implements OrdersService {
                 orderParametersSet.add(orderParametersRestValue);
             }
 
-            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getStatuses().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesCount);
+            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesCount);
 
             ordersRestList.add(ordersRest);
 
