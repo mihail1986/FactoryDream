@@ -6,6 +6,8 @@
 package md.factorydream.spring.service;
 
 import java.util.List;
+import md.factorydream.entites.GroupNotes;
+import md.factorydream.entites.Notes;
 import md.factorydream.entites.OrderNote;
 
 /**
@@ -25,4 +27,6 @@ public interface OrdersNoteService {
     public List findOrderNoteByOrderId(long orderId);
 
     public List findOrderNoteRestByOrderId(long orderId);
+
+    public boolean save(Notes notes, GroupNotes groupNotes, OrderNote orderNote);
 }

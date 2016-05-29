@@ -3,22 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package md.factorydream.spring.dao;
+package md.factorydream.spring.service;
 
 import java.util.List;
-import md.factorydream.entites.StatusCod;
+import md.factorydream.entites.GroupNotes;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface StatusCodDAO {
+public interface GroupNotesService {
 
-    public void save(StatusCod statusCod);
+    public void save(GroupNotes groupNotes);
 
     public List findAll();
-
-    public List findStatusCodByGroupId(short groupId);
-
-    public StatusCod findStatusCodByCodName(String codName);
 }

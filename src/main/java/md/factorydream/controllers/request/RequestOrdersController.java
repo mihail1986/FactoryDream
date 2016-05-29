@@ -68,6 +68,10 @@ public class RequestOrdersController {
         System.out.println(" OrderParametersRestValue " + ordersRest.getOrderParameterses());
         System.out.println(" OrderNotes " + ordersRest.getOrderNotes());
 
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
 
@@ -76,37 +80,38 @@ public class RequestOrdersController {
         if (users == null) {
             throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
         }
-
-        RoleAccess roleAccess = roleAccessSevice.findRoleAccessByUserNameAndUrl(name, "/rest/orders");
-
-        //System.out.println(" Zaitev  " + roleAccess.getAccess().getAccessName());
-        if (roleAccess == null) {
+        
+        if (isAuthorized(name, "/rest/orders", ordersRest)) {
+            if (!ordersService.save(ordersRest, users)) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        switch (roleAccess.getAccess().getAccessName()) {
-            case AccessNameConst.ACCESS_NAME_READ: {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }
-
-            case AccessNameConst.ACCESS_NAME_UPDATE: {
-                if (ordersRest.getId() <= 0) {
-                    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-                }
-            }
-
-        }
-
-        if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        if (!ordersService.save(ordersRest, users)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(ordersRest, HttpStatus.OK);
 
+    }
+
+    private boolean isAuthorized(String name, String url, OrdersRest ordersRest) {
+        RoleAccess roleAccess = roleAccessSevice.findRoleAccessByUserNameAndUrl(name, url);
+
+        if (roleAccess == null) {
+            return false;
+        }
+
+        switch (roleAccess.getAccess().getAccessName()) {
+            case AccessNameConst.ACCESS_NAME_READ: {
+                return false;
+            }
+
+            case AccessNameConst.ACCESS_NAME_UPDATE: {
+                if (ordersRest.getId() <= 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

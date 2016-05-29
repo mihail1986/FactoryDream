@@ -6,12 +6,69 @@
 
 <div ng-app="ordersApp" ng-controller="ordersController" >
 
-
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Here you can found all our orders!!!</h1>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <h3 class="modal-title">Notes</h3>
         </div>
-    </div>
+        <div class="modal-body">
+          
+ <table class="table table-bordered table-striped">
+    
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="note in gridOrderNotes | orderBy:'nameGroups'">
+        <td>{{ note.nameGroups }}</td>
+        <td><p>
+            <p><span class="text-muted" >{{ note.firstName }}</span> 
+            <button type="button" class="btn btn-xs btn-danger">
+                <i class="glyphicon glyphicon-remove" aria-hidden="true">
+                </i>
+            </button>
+            <button type="button" class="btn btn-xs btn-primary">
+                <i class="glyphicon glyphicon-edit" aria-hidden="true"> 
+                </i>
+            </button></p>
+                <input type="text" class="form-control" value="{{ note.note }}">
+                </p>
+            </td>
+      </tr>
+    </tbody>
+    
+  </table>
+        
+        
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>    
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+        </div>
+    </nav>
+    <!--    <div class="jumbotron">
+            <div class="container">
+                <h1>Here you can found all our orders!!!</h1>
+            </div>
+        </div>-->
     <div class="container-fluid">
         <div class="row">
             <div class="panel panel-default">
@@ -34,6 +91,8 @@
 <script src="js/angular.1.4.9/angular-resource.min.js"></script>
 <script src="js/angular.1.4.9/angular-touch.min.js"></script>
 <script src="js/angular.1.4.9/angular-animate.min.js"></script>
+<script src="js/angular.1.4.9/angular-route.min.js"></script>
+<script src="js/ui-bootstrap-tpls-1.2.3.min.js"></script>
 <script src="js/uiGridv3.1.1/grunt-scripts/csv.js"></script>
 <script src="js/uiGridv3.1.1/grunt-scripts/vfs_fonts.js"></script>
 <script src="js/uiGridv3.1.1/ui-grid.min.js"></script>
@@ -45,4 +104,6 @@
 <script src="js/scripts/services/diameter_service.js"></script>
 <script src="js/scripts/services/customer_service.js"></script>
 <script src="js/scripts/services/thread_service.js"></script>
+<script src="js/scripts/services/status_service.js"></script>
+<script src="js/scripts/services/orderNotes_service.js"></script>
 <script src="js/scripts/controllers/orders_controller.js"></script>

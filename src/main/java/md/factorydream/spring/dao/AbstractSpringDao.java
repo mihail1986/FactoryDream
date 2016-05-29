@@ -51,4 +51,25 @@ public abstract class AbstractSpringDao {
         return null;
     }
 
+    protected Object find(Class clazz, long id) {
+
+        Object object = null;
+        String tableName = Character.toLowerCase(clazz.getName().charAt(24)) + clazz.getName().substring(25);
+
+        Session session = this.sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery(" FROM " + clazz.getName()
+                + " " + tableName + " WHERE " + tableName + ".id  = :Id ");
+
+        query.setLong("Id", id);
+
+        List list = query.list();
+
+        if (list != null && list.size() > 0) {
+            object = list.get(0);
+        }
+        return object;
+
+    }
+
 }

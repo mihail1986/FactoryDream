@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import md.factorydream.entites.GroupNotes;
+import md.factorydream.entites.Notes;
 import md.factorydream.entites.OrderNote;
 import md.factorydream.entites.UserDepartment;
 import md.factorydream.entites.rest.OrderNoteRest;
+import md.factorydream.spring.dao.GroupNotesDAO;
+import md.factorydream.spring.dao.NotesDAO;
 import md.factorydream.spring.dao.OrderNoteDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +27,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrdersNoteServiceImpl implements OrdersNoteService {
 
-    OrderNoteDAO orderNoteDAO;
+    private OrderNoteDAO orderNoteDAO;
+
+    private NotesDAO notesDAO;
+    private GroupNotesDAO groupNotesDAO;
 
     public void setOrderNoteDAO(OrderNoteDAO orderNoteDAO) {
         this.orderNoteDAO = orderNoteDAO;
+    }
+
+    public void setNotesDAO(NotesDAO notesDAO) {
+        this.notesDAO = notesDAO;
+    }
+
+    public void setGroupNotesDAO(GroupNotesDAO groupNotesDAO) {
+        this.groupNotesDAO = groupNotesDAO;
     }
 
     @Override
@@ -67,6 +82,7 @@ public class OrdersNoteServiceImpl implements OrdersNoteService {
         List ordersNoteList = findOrderNoteByOrderId(orderId);
 
         for (Object orderNotes : ordersNoteList) {
+
             OrderNote orderNote = (OrderNote) orderNotes;
 
             String nameGroups = orderNote.getGroupNotes().getNoteGroups().getName();
@@ -77,6 +93,7 @@ public class OrdersNoteServiceImpl implements OrdersNoteService {
 
             Iterator<UserDepartment> iterator = userDepartments.iterator();
             String employeesName = "";
+
             while (iterator.hasNext()) {
                 UserDepartment userDepartment = iterator.next();
                 employeesName = userDepartment.getEmployees().getFirstName() + " " + userDepartment.getEmployees().getLastName();
@@ -88,4 +105,14 @@ public class OrdersNoteServiceImpl implements OrdersNoteService {
 
         return orderNotesRestList;
     }
+
+    @Override
+    @Transactional
+    public boolean save(Notes notes, GroupNotes groupNotes, OrderNote orderNote) {
+        notesDAO.save(notes);
+        groupNotesDAO.save(groupNotes);
+        orderNoteDAO.save(orderNote);
+        return true;
+    }
+
 }

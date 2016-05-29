@@ -10,12 +10,14 @@ import java.util.List;
 import md.factorydream.entites.Diameters;
 import md.factorydream.entites.rest.DiametersValueRest;
 import md.factorydream.spring.dao.DiametersDAO;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Zaițev.Victor
  */
+@Service
 public class DiametersServiceImpl implements DiametersService {
 
     private DiametersDAO diametersDAO;

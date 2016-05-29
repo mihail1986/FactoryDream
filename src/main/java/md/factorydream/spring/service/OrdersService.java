@@ -26,5 +26,5 @@ public interface OrdersService {
 
     public boolean save(OrdersRest ordersRest, Users users);
     
-    
+    public Orders findOrdersById(long id);
 }

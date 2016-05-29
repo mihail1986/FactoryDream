@@ -24,4 +24,6 @@ public interface OrdersDAO {
 
     public boolean update(OrdersRest ordersRest, Users users);
 
+    public Orders findOrdersById(long id);
+
 }

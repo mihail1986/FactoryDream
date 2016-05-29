@@ -57,4 +57,10 @@ public class StatusCodServiceImpl implements StatusCodService {
 
     }
 
+    @Override
+    @Transactional
+    public StatusCod findStatusCodByCodName(String codName) {
+        return statusCodDAO.findStatusCodByCodName(codName);
+    }
+
 }

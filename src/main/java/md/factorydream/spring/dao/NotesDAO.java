@@ -6,19 +6,19 @@
 package md.factorydream.spring.dao;
 
 import java.util.List;
-import md.factorydream.entites.StatusCod;
+import md.factorydream.entites.Notes;
+import md.factorydream.entites.Users;
+import md.factorydream.entites.rest.NoteUpdateRest;
 
 /**
  *
  * @author Zaițev.Victor
  */
-public interface StatusCodDAO {
+public interface NotesDAO {
 
-    public void save(StatusCod statusCod);
+    public void save(Notes notes);
 
     public List findAll();
 
-    public List findStatusCodByGroupId(short groupId);
-
-    public StatusCod findStatusCodByCodName(String codName);
+    public boolean update(NoteUpdateRest noteUpdateRest, Users users);
 }

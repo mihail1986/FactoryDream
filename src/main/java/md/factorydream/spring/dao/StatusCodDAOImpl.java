@@ -43,4 +43,23 @@ public class StatusCodDAOImpl extends AbstractSpringDao implements StatusCodDAO 
         return list;
     }
 
+    @Override
+    public StatusCod findStatusCodByCodName(String codName) {
+
+        StatusCod statusCod = null;
+
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery(" FROM StatusCod"
+                + " WHERE codName = :CodName ");
+
+        query.setString("CodName", codName);
+
+        List list = query.list();
+
+        if (list != null && list.size() > 0) {
+            statusCod = (StatusCod) list.get(0);
+        }
+        return statusCod;
+    }
+
 }

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RoleAccessSeviceImpl implements RoleAccessSevice {
 
-    RoleAccessDAO roleAccessDAO;
+    private RoleAccessDAO roleAccessDAO;
 
     public void setRoleAccessDAO(RoleAccessDAO roleAccessDAO) {
         this.roleAccessDAO = roleAccessDAO;

@@ -58,8 +58,10 @@ public class OrderNoteDAOImpl extends AbstractSpringDao implements OrderNoteDAO 
     public List findOrderNoteByOrderId(long orderId) {
         Session session = this.sessionFactory.getCurrentSession();
 
-        Query query = session.createQuery(" FROM OrderNote "
-                + " WHERE orders.id=:OrderID");
+        Query query = session.createQuery(" "
+                + " FROM  OrderNote "
+                + " WHERE orders.id=:OrderID "
+                + " ORDER BY groupNotes.noteGroups.name ");
 
         query.setLong("OrderID", orderId);
 

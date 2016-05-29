@@ -16,8 +16,6 @@ import md.factorydream.entites.rest.OrderParametersRestValue;
 import md.factorydream.entites.rest.OrderRestReadOnly;
 import md.factorydream.entites.rest.OrdersRest;
 import md.factorydream.spring.dao.OrdersDAO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,14 +28,18 @@ public class OrdersServiceImpl implements OrdersService {
 
     private OrdersDAO ordersDAO;
 
-    @Autowired
-    @Qualifier(value = "ordersNoteService")
     private OrdersNoteService ordersNoteService;
 
     public void setOrdersDAO(OrdersDAO ordersDAO) {
         this.ordersDAO = ordersDAO;
     }
 
+    public void setOrdersNoteService(OrdersNoteService ordersNoteService) {
+        this.ordersNoteService = ordersNoteService;
+    }
+
+    
+    
     @Override
     @Transactional
     public void save(Orders orders) {
@@ -51,6 +53,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
+    @Transactional
     public List findAllOrdersRest() {
         List ordersRestList = new ArrayList();
 
@@ -69,7 +72,7 @@ public class OrdersServiceImpl implements OrdersService {
                 orderParametersSet.add(orderParametersRestValue);
             }
 
-            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getStatuses().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesCount);
+            OrdersRest ordersRest = new OrdersRest(order.getId(), order.getColors().getId(), order.getCustomers().getId(), order.getDiameters().getId(), order.getModels().getId(), order.getStatusCod().getId(), order.getThreads().getId(), order.getTypes().getId(), order.getOrderData(), order.getOrderIdentifier(), order.getQuantity(), order.getDelivery(), order.getDistributionDate(), order.getLastUpdateDate(), orderParametersSet, orderNotesCount);
 
             ordersRestList.add(ordersRest);
 
@@ -78,6 +81,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
+    @Transactional
     public List findAllOrdersRestReadOnly() {
         List ordersRestReadonlyList = new ArrayList();
 
@@ -129,6 +133,12 @@ public class OrdersServiceImpl implements OrdersService {
             return ordersDAO.insert(ordersRest, users);
         }
         return ordersDAO.update(ordersRest, users);
+    }
+
+    @Override
+    @Transactional
+    public Orders findOrdersById(long id) {
+        return ordersDAO.findOrdersById(id);
     }
 
 }

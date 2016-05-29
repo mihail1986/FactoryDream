@@ -11,28 +11,30 @@ package md.factorydream.entites.rest;
  */
 public class ColorsValueRest {
 
-    private short id;
-    private String value;
+    private short value;
+    private String label;
 
-    public ColorsValueRest(short id, String value) {
-        this.id = id;
+    public ColorsValueRest(short value, String label) {
         this.value = value;
+        this.label = label;
     }
 
-    public short getId() {
-        return id;
-    }
-
-    public void setId(short id) {
-        this.id = id;
-    }
-
-    public String getValue() {
+    public short getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(short value) {
         this.value = value;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+    
+    
 
 }

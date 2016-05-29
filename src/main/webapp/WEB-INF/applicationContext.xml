@@ -133,6 +133,7 @@
 
     <bean id="ordersService" class="md.factorydream.spring.service.OrdersServiceImpl">
         <property name="ordersDAO" ref="ordersDAO"></property>
+        <property name="ordersNoteService" ref="ordersNoteService"></property>
     </bean>
     
     <bean id="roleAccessDAO" class="md.factorydream.spring.dao.RoleAccessDAOImpl">
@@ -203,7 +204,9 @@
     
     
     <bean id="ordersNoteService" class="md.factorydream.spring.service.OrdersNoteServiceImpl">
-        <property name="orderNoteDAO" ref="orderNoteDAO"></property>        
+        <property name="orderNoteDAO" ref="orderNoteDAO"></property>  
+        <property name="groupNotesDAO" ref="groupNotesDAO"></property>  
+        <property name="notesDAO" ref="notesDAO"></property> 
     </bean> 
     
     
@@ -213,6 +216,30 @@
     
     <bean id="statusCodService" class="md.factorydream.spring.service.StatusCodServiceImpl">
         <property name="statusCodDAO" ref="statusCodDAO"></property>
+    </bean>
+    
+    <bean id="notesDAO" class="md.factorydream.spring.dao.NotesDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="notesService" class="md.factorydream.spring.service.NotesServiceImpl">
+        <property name="notesDAO" ref="notesDAO"></property>
+    </bean>
+    
+    <bean id="noteGroupsDAO" class="md.factorydream.spring.dao.NoteGroupsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="noteGroupsService" class="md.factorydream.spring.service.NoteGroupsServiceImpl">
+        <property name="noteGroupsDAO" ref="noteGroupsDAO"></property>
+    </bean>
+    
+    <bean id="groupNotesDAO" class="md.factorydream.spring.dao.GroupNotesDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="groupNotesService" class="md.factorydream.spring.service.GroupNotesServiceImpl">
+        <property name="groupNotesDAO" ref="groupNotesDAO"></property>
     </bean>
     
 </beans>
