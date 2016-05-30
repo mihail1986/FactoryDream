@@ -133,7 +133,7 @@
 
     <bean id="ordersService" class="md.factorydream.spring.service.OrdersServiceImpl">
         <property name="ordersDAO" ref="ordersDAO"></property>
-        <property name="ordersNoteService" ref="ordersNoteService"></property>
+        <property name="ordersNoteDAO" ref="orderNoteDAO"></property>
     </bean>
     
     <bean id="roleAccessDAO" class="md.factorydream.spring.dao.RoleAccessDAOImpl">

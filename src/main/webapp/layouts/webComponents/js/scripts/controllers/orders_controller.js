@@ -7,7 +7,7 @@
 angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal', 'ordersService', 'modelService', 'colorService', 'typeService', 'diameterService', 'customerService', 'threadService', 'statusesService', 'uiGridConstants', function ($scope, $uibModal, ordersService, modelService, colorService, typeService, diameterService, customerService, threadService, statusesService, uiGridConstants) {
 
         var self = this;
-        self.user_access;
+        $scope.user_access;
         self.orders = [];
         $scope.myData = {};
         $scope.modulesValue = {};
@@ -57,9 +57,9 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
         self.fetchAllOrders = function () {
             ordersService.Orders().query().$promise.then(function (result) {
-                self.user_access = result[0].userAccess;
+                $scope.user_access = result[0].userAccess;
                 self.biuldData(result[1].orders);
-                self.initOrderGridColumn(self.user_access);
+                self.initOrderGridColumn($scope.user_access);
             });
         };
         self.initOrderGridColumn = function (userAccess) {
@@ -91,7 +91,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 case "update":
                     $scope.myData.columnDefs = self.fullAccess;
                     $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-
                     $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
                     $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
                     $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
@@ -122,6 +121,13 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     break;
                 default:
                     $scope.myData.columnDefs = self.readOnlyAccess;
+                    $scope.myData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
+                    $scope.myData.columnDefs[3].filter.selectOptions = $scope.customersValue;
+                    $scope.myData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.myData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
+                    $scope.myData.columnDefs[11].filter.selectOptions = $scope.typesValue;
+                    $scope.myData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
+                    $scope.myData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
                     $scope.myData.enableCellEdit = false;
                     $scope.myData.enableFiltering = true;
                     $scope.myData.enableSelectAll = true;
@@ -130,69 +136,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     break;
 
             }
-//            if (userAccess === 'full') {
-//                $scope.myData.columnDefs = self.fullAccess;
-//                $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-//                $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-//                $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
-//                $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
-//                $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
-//                $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;        
-//                $scope.myData.enableGridMenu = true;
-//                $scope.myData.enableCellEditOnFocus = true;
-//                $scope.myData.enableFiltering = true;
-//                $scope.myData.exporterMenuPdf = false;
-//                $scope.myData.exporterCsvFilename = 'myFile.csv';
-//        $scope.myData = {
-////        enableFiltering: true,
-////        showGridFooter: true,
-////        enableGridMenu: true,
-////        enableSorting: true,
-////        enableSelectAll: true,
-////        exporterMenuPdf: false,
-////        rowTemplate: rowTemplate(),
-////        enableColumnResizing: true,
-////        enableCellEditOnFocus: true,
-////        modifierKeysToMultiSelectCells: true,
-////        paginationPageSizes: [100,200,500,1000],
-////        paginationPageSize: 100, 
-//            columnDefs: self.fullAccess
-////               [
-////                {name: 'orderData', displayName: 'Data', type: 'date', cellFilter: 'date:"dd.MM.yyyy"', enableColumnMenu: false, width: 90},
-////                {name: 'customer', displayName: 'Client', enableColumnMenu: false, width: 150},
-////                {name: 'Client Order id', displayName: 'Ordin Client', enableColumnMenu: false, /* visible: false, */ width: 150},
-////                {name: 'Symbol', displayName: 'Symbol', enableColumnMenu: false, /* visible: false, */ width: 100},
-////                {name: 'orderIdentifier', displayName: 'Ordin Id', enableColumnMenu: false, width: 80},
-////                {name: 'model', displayName: 'Model', enableColumnMenu: false, width: 80
-//////                    ,editableCellTemplate: 'ui-grid/dropdownEditor'
-//////                    ,cellFilter: 'mapCustomersById'
-//////                    ,editDropdownValueLabel: 'value'
-//////                    ,editDropdownRowEntityOptionsArrayPath: 'modelsOptions'
-////                },
-////                {name: 'T', displayName: 'T', enableColumnMenu: false, width: 80},
-////                {name: 'LB/FT', displayName: 'Lb/Ft', enableColumnMenu: false, width: 80},
-////                {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80},
-////                {name: 'type', displayName: 'Tipul', enableColumnMenu: false, width: 90},
-////                {name: 'thread', displayName: 'Filet', enableColumnMenu: false, width: 150},
-////                {name: 'color', displayName: 'Culoare', enableColumnMenu: false, width: 80},
-////                {name: 'Vent Hole', displayName: 'Vent.mm', enableColumnMenu: false, width: 80},
-////                {name: 'OD', displayName: 'OD.mm', enableColumnMenu: false, width: 80},
-////                {name: 'Drift', displayName: 'Drift_mm', enableColumnMenu: false, width: 80},
-////                {name: 'delivery', displayName: 'Consegna', type: 'date', cellFilter: 'date:"dd.MM.yyyy"', enableColumnMenu: false, width: 90},
-////                {name: 'quantity', displayName: 'Q-ty', enableColumnMenu: false, width: 80}
-////            ]
-////    exporterCsvFilename: 'myFile.csv'
-//
-//        };
-//            } else if (userAccess === 'read') {
-//                $scope.myData.columnDefs = self.readOnlyAccess;
-//                $scope.myData.enableCellEdit = false;
-//                $scope.myData.enableFiltering = true;
-//                $scope.myData.enableSelectAll = true;
-//                $scope.myData.enableGridMenu = true;
-//                $scope.myData.exporterMenuPdf = false;
-//                $scope.myData.exporterCsvFilename = 'myFile.csv';
-//            }
         };
 //------------------------------------------------------------------------------
         $scope.showNotes = function (row) {
@@ -222,12 +165,13 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
   $scope.animationsEnabled = true;
 
-        $scope.open = function (size, orderSourceId) {
+        $scope.open = function (size, orderSourceId, userAccess) {
             console.info(orderSourceId);
+            console.info(userAccess);
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                template:'<div order-notes type="'+userAccess+'"></div>',
+                controller: 'orderNotesModalController',
                 size: size,
                 resolve: {
                     orderId: function () {
@@ -247,7 +191,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
 
         self.fullAccess = [
-            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.open(\'lg\',row.entity.id)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
+            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.open(\'lg\', row.entity.id, grid.appScope.user_access)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
             {name: 'status', displayName: 'Status', pinnedLeft: true, enableCellEdit: true, enableColumnMenu: false, width: 80
                 , filter: {type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
@@ -318,20 +262,34 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         ];
 
         self.readOnlyAccess = [
-            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.showNotes(row)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
-            {name: 'status', displayName: 'Status', pinnedLeft: true, enableColumnMenu: false, cellTemplate: '<div class="ui-grid-cell-contents" ng-class="grid.appScope.statusNameClass(row)" >{{COL_FIELD}}</div>', width: 80},
+            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.open(\'lg\', row.entity.id, grid.appScope.user_access)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
+            {name: 'status', displayName: 'Status', pinnedLeft: true, enableColumnMenu: false, cellTemplate: '<div class="ui-grid-cell-contents" ng-class="grid.appScope.statusNameClass(row)" >{{COL_FIELD}}</div>', width: 80
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
             {name: 'orderData', displayName: 'Data', type: 'date', cellFilter: 'date:"dd.MM.yyyy"', enableColumnMenu: false, width: 90},
-            {name: 'customer', displayName: 'Client', enableColumnMenu: false, width: 150},
+            {name: 'customer', displayName: 'Client', enableColumnMenu: false, width: 150
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
             {name: 'Client Order id', displayName: 'Ordin Client', enableColumnMenu: false, visible: false, width: 150},
             {name: 'Symbol', displayName: 'Symbol', enableColumnMenu: false, visible: false, width: 100},
             {name: 'orderIdentifier', displayName: 'Ordin Id', enableColumnMenu: false, width: 80},
-            {name: 'model', displayName: 'Model', enableColumnMenu: false, width: 80},
+            {name: 'model', displayName: 'Model', enableColumnMenu: false, width: 80
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
             {name: 'T', displayName: 'T', enableColumnMenu: false, width: 80},
             {name: 'LB/FT', displayName: 'Lb/Ft', enableColumnMenu: false, width: 90},
-            {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80},
-            {name: 'type', displayName: 'Tipul', enableColumnMenu: false, width: 90},
-            {name: 'thread', displayName: 'Filet', enableColumnMenu: false, width: 150},
-            {name: 'color', displayName: 'Culoare', enableColumnMenu: false, width: 80},
+            {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
+            {name: 'type', displayName: 'Tipul', enableColumnMenu: false, width: 90
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
+            {name: 'thread', displayName: 'Filet', enableColumnMenu: false, width: 150
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
+            {name: 'color', displayName: 'Culoare', enableColumnMenu: false, width: 80
+                , filter: {type: uiGridConstants.filter.SELECT}
+            },
             {name: 'Vent Hole', displayName: 'Vent.mm', enableColumnMenu: false, width: 80},
             {name: 'OD', displayName: 'OD.mm', enableColumnMenu: false, width: 80},
             {name: 'Drift', displayName: 'Drift_mm', enableColumnMenu: false, width: 80},
@@ -504,25 +462,3 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         template: '<select class="form-control input-sm"  style="padding-right: 0px; padding-left: 0px;" ng-model="colFilter.term" ng-options="option.id as option.value for option in colFilter.options"></select>'
     };
 });
-angular.module('ordersApp').controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'orderId', 'orderNotesService',  function ($scope, $uibModalInstance, orderId, orderNotesService) {
-
-    var self = this;
-    $scope.gridOrderNotes = {};
-     
-        self.fetchAllOrderNotesService = function () {
-            orderNotesService.OrderNotes().query({idCod: orderId}).$promise.then(function (result) {
-                $scope.gridOrderNotes = result;
-            });
-        };
-
-        self.fetchAllOrderNotesService();
-   
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-  
-}]);

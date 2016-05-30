@@ -20,11 +20,13 @@ public interface OrdersService {
 
     public List findAll();
 
+    public List findAllEnableOrders();
+
     public List findAllOrdersRest();
 
     public List findAllOrdersRestReadOnly();
 
     public boolean save(OrdersRest ordersRest, Users users);
-    
+
     public Orders findOrdersById(long id);
 }

@@ -5,3 +5,12 @@ body {
 .login-panel {
     margin-top: 25%;
 }
+
+.non-resize {
+     resize: none;
+     min-height: 50px;
+}
+
+.clear-both{
+     clear: both;
+}

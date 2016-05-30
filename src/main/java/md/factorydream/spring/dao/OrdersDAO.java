@@ -20,6 +20,8 @@ public interface OrdersDAO {
 
     public List findAll();
 
+    public List findAllEnableOrders();
+
     public boolean insert(OrdersRest ordersRest, Users users);
 
     public boolean update(OrdersRest ordersRest, Users users);

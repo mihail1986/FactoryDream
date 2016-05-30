@@ -12,11 +12,13 @@ import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.NoteUpdateRest;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Zaițev.Victor
  */
+@Repository
 public class NotesDAOImpl extends AbstractSpringDao implements NotesDAO {
 
     @Override

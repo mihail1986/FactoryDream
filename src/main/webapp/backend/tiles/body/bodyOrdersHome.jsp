@@ -6,49 +6,12 @@
 
 <div ng-app="ordersApp" ng-controller="ordersController" >
 
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-        <h3 class="modal-title">Notes</h3>
-        </div>
-        <div class="modal-body">
-          
- <table class="table table-bordered table-striped">
-    
-    <thead>
-      <tr>
-        <th>Parameter</th>
-        <th>Note</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <tr ng-repeat="note in gridOrderNotes | orderBy:'nameGroups'">
-        <td>{{ note.nameGroups }}</td>
-        <td><p>
-            <p><span class="text-muted" >{{ note.firstName }}</span> 
-            <button type="button" class="btn btn-xs btn-danger">
-                <i class="glyphicon glyphicon-remove" aria-hidden="true">
-                </i>
-            </button>
-            <button type="button" class="btn btn-xs btn-primary">
-                <i class="glyphicon glyphicon-edit" aria-hidden="true"> 
-                </i>
-            </button></p>
-                <input type="text" class="form-control" value="{{ note.note }}">
-                </p>
-            </td>
-      </tr>
-    </tbody>
-    
-  </table>
-        
-        
-        </div>
-        <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>    
+<!--    <script type="text/ng-template" id="myModalContent.html">
+
+    </script>    -->
+
+<!--<div order-notes type="Full"></div>-->
+
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -106,4 +69,6 @@
 <script src="js/scripts/services/thread_service.js"></script>
 <script src="js/scripts/services/status_service.js"></script>
 <script src="js/scripts/services/orderNotes_service.js"></script>
+<script src="js/scripts/controllers/orderNotesModal_controller.js"></script>
+<script src="js/scripts/directives/orderNotes_directives.js"></script>
 <script src="js/scripts/controllers/orders_controller.js"></script>

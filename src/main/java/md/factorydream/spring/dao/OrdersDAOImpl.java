@@ -117,4 +117,19 @@ public class OrdersDAOImpl extends AbstractSpringDao implements OrdersDAO {
     public Orders findOrdersById(long id) {
         return (Orders) super.find(Orders.class, id);
     }
+
+    @Override
+    public List findAllEnableOrders() {
+        Session session = this.sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery(" "
+                + " FROM Orders "
+                + " WHERE statusCod.statuses.name "
+                + " IN ('Impachetare', 'Filetare', 'Asamblare', 'Stampare', 'Active', 'None' ) ");
+
+        List list = query.list();
+
+        return list;
+
+    }
 }

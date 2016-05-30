@@ -1,0 +1,39 @@
+        <div class="modal-header">
+        <h3 class="modal-title pull-left">Notes</h3>
+        <button type="button" class="btn btn-info pull-right" ng-click="addNewOrder()">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add New Note
+        </button>
+        <div class="clear-both"></div>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+            <table class="table">
+               <thead>
+                 <tr>
+                   <th>Parameter</th>
+                   <th>Note</th>
+                 </tr>
+               </thead>
+
+               <tbody>
+                 <tr ng-repeat="note in gridOrderNotes | orderBy:'nameGroups'">
+                   <td>{{ note.nameGroups }}</td>
+                   <td>
+                       <p><span class="text-muted" >{{ note.firstName }}</span> 
+                       <button type="button" ng-click="addNewNote(note)" class="btn btn-xs btn-primary">
+                           Save
+                       </button></p>
+                           <textarea class="form-control non-resize" ng-modal="note.note">{{ note.note }}</textarea>
+                       </td>
+                 </tr>
+               </tbody>
+
+             </table>
+        </div>
+        
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>

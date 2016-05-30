@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.ModelAndView;
 import md.factorydream.spring.service.CustomersService;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,8 @@ import md.factorydream.spring.service.CustomersService;
  */
 @Controller
 public class MultiActionControllers {
+    
+    private static final Logger LOGGER = Logger.getLogger(MultiActionControllers.class);
 
     //Customers Service which will do all data retrieval/manipulation work
     @Autowired(required = true)
@@ -41,7 +44,7 @@ public class MultiActionControllers {
     //----------------------- Login Page ----------------------------------------------------
     @RequestMapping(value = "/login")
     public ModelAndView getLoginForm(@RequestParam(required = false) String authfailed) {
-
+        
         String message = "";
         if (authfailed != null) {
             message = "numele si parola sunt gresite";
@@ -52,7 +55,7 @@ public class MultiActionControllers {
     //----------------------- Orders Page ----------------------------------------------------
     @RequestMapping(value = "/orders")
     public String getOrders() {
-
+        LOGGER.info("Utilizatorul: a accesat linkul \"orders\" ");
         return "ordershome";
     }
 
@@ -66,7 +69,7 @@ public class MultiActionControllers {
         model.addAttribute("name", name);
         model.addAttribute("user", firstName);
         model.addAttribute("nrConnection", name);
-
+        
         return "home";
     }
 
@@ -78,5 +81,5 @@ public class MultiActionControllers {
         model.addAttribute("activeUser", name);
         return "accessDenied";
     }
-
+    
 }

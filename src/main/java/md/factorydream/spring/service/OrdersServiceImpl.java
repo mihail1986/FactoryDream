@@ -15,6 +15,7 @@ import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.OrderParametersRestValue;
 import md.factorydream.entites.rest.OrderRestReadOnly;
 import md.factorydream.entites.rest.OrdersRest;
+import md.factorydream.spring.dao.OrderNoteDAO;
 import md.factorydream.spring.dao.OrdersDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,19 +28,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrdersServiceImpl implements OrdersService {
 
     private OrdersDAO ordersDAO;
-
-    private OrdersNoteService ordersNoteService;
+    private OrderNoteDAO ordersNoteDAO;
 
     public void setOrdersDAO(OrdersDAO ordersDAO) {
         this.ordersDAO = ordersDAO;
     }
 
-    public void setOrdersNoteService(OrdersNoteService ordersNoteService) {
-        this.ordersNoteService = ordersNoteService;
+    public void setOrdersNoteDAO(OrderNoteDAO ordersNoteDAO) {
+        this.ordersNoteDAO = ordersNoteDAO;
     }
 
-    
-    
     @Override
     @Transactional
     public void save(Orders orders) {
@@ -57,7 +55,7 @@ public class OrdersServiceImpl implements OrdersService {
     public List findAllOrdersRest() {
         List ordersRestList = new ArrayList();
 
-        List ordersList = findAll();
+        List ordersList = findAllEnableOrders();
 
         for (Object orders : ordersList) {
 
@@ -65,7 +63,7 @@ public class OrdersServiceImpl implements OrdersService {
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
 
-            long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
+            long orderNotesCount = ordersNoteDAO.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
                 OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
@@ -85,7 +83,7 @@ public class OrdersServiceImpl implements OrdersService {
     public List findAllOrdersRestReadOnly() {
         List ordersRestReadonlyList = new ArrayList();
 
-        List ordersList = findAll();
+        List ordersList = findAllEnableOrders();
 
         for (Object orders : ordersList) {
 
@@ -93,7 +91,7 @@ public class OrdersServiceImpl implements OrdersService {
 
             Set<OrderParametersRestValue> orderParametersSet = new HashSet<>();
 
-            long orderNotesCount = ordersNoteService.countNotesPerOrder(order.getId());
+            long orderNotesCount = ordersNoteDAO.countNotesPerOrder(order.getId());
 
             for (OrderParameters orderParameters : order.getOrderParameterses()) {
                 OrderParametersRestValue orderParametersRestValue = new OrderParametersRestValue(orderParameters.getParamNames().getName(), orderParameters.getValue());
@@ -139,6 +137,12 @@ public class OrdersServiceImpl implements OrdersService {
     @Transactional
     public Orders findOrdersById(long id) {
         return ordersDAO.findOrdersById(id);
+    }
+
+    @Override
+    @Transactional
+    public List findAllEnableOrders() {
+        return ordersDAO.findAllEnableOrders();
     }
 
 }

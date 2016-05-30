@@ -7,11 +7,13 @@ package md.factorydream.spring.dao;
 
 import java.util.List;
 import md.factorydream.entites.GroupNotes;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Zaițev.Victor
  */
+@Repository
 public class GroupNotesDAOImpl extends AbstractSpringDao implements GroupNotesDAO {
 
     @Override

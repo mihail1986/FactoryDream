@@ -11,7 +11,7 @@ angular.module('ordersApp').factory('statusesService', ['$resource', function ($
         return {
             Statuses: function () {
                 return $resource("/FactoryDream/rest/statusCodStatuses", {}, {
-                    query: {method: "GET", isArray: true, url: "/FactoryDream/rest/statusCodStatuses?statusCod=:cod"},
+                    query: {method: "GET", isArray: true, url: "/FactoryDream/rest/statusCodStatuses?statusGroup=:cod"},
                     create: {method: "POST", url: "/FactoryDream/save/orders"},
                     get: {method: "GET", url: "/FactoryDream/rest/statusCodStatuses?id=:id"},
                     remove: {method: "DELETE", url: "/FactoryDream/rest/statusCodStatuses?id=:id"},
