@@ -15,7 +15,9 @@
         <intercept-url pattern="/home**" access="hasAnyRole('ROLE_ADMIN')" />       
         <intercept-url pattern="/orders**" access="isAuthenticated()"/>
         <intercept-url pattern="/rest/**" access="isAuthenticated()"/>
-        
+        <intercept-url pattern="/update/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/save/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/delete/**" access="isAuthenticated()"/>
         
         <intercept-url pattern="/orders222**" access="hasAnyRole('ROLE_CLIENTELA_OPERATOR', 'ROLE_CARD_OPERATOR')"/>
         

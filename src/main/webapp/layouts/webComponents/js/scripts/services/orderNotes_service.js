@@ -6,7 +6,7 @@
 
 'use strict';
 
-angular.module('ordersApp').factory('orderNotesService', ['$resource', function ($resource) {
+angular.module('ordersApp').factory('orderNotesService', ['$resource', '$q', '$http', function ($resource, $q, $http) {
 
         return {
             OrderNotes: function () {
@@ -14,8 +14,16 @@ angular.module('ordersApp').factory('orderNotesService', ['$resource', function 
                     query: {method: "GET", isArray: true, url: "/FactoryDream/rest/orderNotes?orderId=:idCod"},
                     create: {method: "POST", url: "/FactoryDream/rest/orderNotes"},
                     get: {method: "GET", url: "/FactoryDream/rest/orderNotes"},
-                    remove: {method: "DELETE", url: "/FactoryDream/rest/orderNotes"},
-                    update: {method: "POST", url: "/FactoryDream/rest/orderNotes"}
+                    remove: {method: "DELETE", url: "/FactoryDream/delete/notes?note=:note"},
+                    update: {method: 'POST', url: "/FactoryDream/update/notes"}
+                });
+            },
+            noteUpdate: function (note) {
+                return $http({
+                    method: 'POST',
+                    url: '/FactoryDream/update/notes',
+                    contentType: "application/json",
+                    data: note
                 });
             }
         };

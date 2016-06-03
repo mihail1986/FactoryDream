@@ -49,7 +49,7 @@ public class RequestOrdersController {
 
     //------------------- Save a Orders --------------------------------------------------------
     @RequestMapping(value = "/save/orders", method = RequestMethod.POST)
-    public ResponseEntity<OrdersRest> createUser(@Valid @RequestBody OrdersRest ordersRest, BindingResult bindingResult) {
+    public ResponseEntity<OrdersRest> saveOrders(@Valid @RequestBody OrdersRest ordersRest, BindingResult bindingResult) {
 
         System.out.println(" Orders Id " + ordersRest.getId());
         System.out.println(" colorID " + ordersRest.getColor());
@@ -80,7 +80,7 @@ public class RequestOrdersController {
         if (users == null) {
             throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
         }
-        
+
         if (isAuthorized(name, "/rest/orders", ordersRest)) {
             if (!ordersService.save(ordersRest, users)) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

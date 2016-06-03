@@ -8,8 +8,9 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
         var self = this;
         $scope.user_access;
+        $scope.orderAddFlag = true;
         self.orders = [];
-        $scope.myData = {};
+        $scope.ordersGridData = {};
         $scope.modulesValue = {};
         $scope.colorsValue = {};
         $scope.typesValue = {};
@@ -17,6 +18,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         $scope.customersValue = {};
         $scope.threadsValue = {};
         $scope.statusesValue = {};
+        $scope.orderParameters = [];
 
         self.fetchAllModelsValue = function () {
             modelService.Models().query().$promise.then(function (result) {
@@ -66,84 +68,79 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
             switch (userAccess) {
                 case "full":
-                    $scope.myData.columnDefs = self.fullAccess;
-                    $scope.myData.columnDefs[1].editDropdownOptionsArray = $scope.statusesValue;
-                    $scope.myData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
-                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-                    $scope.myData.columnDefs[3].filter.selectOptions = $scope.customersValue;
-                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-                    $scope.myData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
-                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
-                    $scope.myData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
-                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
-                    $scope.myData.columnDefs[11].filter.selectOptions = $scope.typesValue;
-                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
-                    $scope.myData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
-                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
-                    $scope.myData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
-                    $scope.myData.enableGridMenu = true;
-                    $scope.myData.enableCellEditOnFocus = true;
-                    $scope.myData.enableFiltering = true;
-                    $scope.myData.exporterMenuPdf = false;
-                    $scope.myData.exporterCsvFilename = 'myFile.csv';
-
+                    $scope.ordersGridData.columnDefs = self.fullAccess;
+                    $scope.ordersGridData.columnDefs[1].editDropdownOptionsArray = $scope.statusesValue;
+                    $scope.ordersGridData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
+                    $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    $scope.ordersGridData.columnDefs[3].filter.selectOptions = $scope.customersValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.ordersGridData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
+                    $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.ordersGridData.columnDefs[11].filter.selectOptions = $scope.typesValue;
+                    $scope.ordersGridData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.ordersGridData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
+                    $scope.ordersGridData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.ordersGridData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
+                    $scope.ordersGridData.enableGridMenu = true;
+                    $scope.ordersGridData.enableCellEditOnFocus = true;
+                    $scope.ordersGridData.enableFiltering = true;
+                    $scope.ordersGridData.exporterMenuPdf = false;
+                    $scope.ordersGridData.exporterCsvFilename = 'myFile.csv';
+                    $scope.orderAddFlag = false;
+                    
                     break;
                 case "update":
-                    $scope.myData.columnDefs = self.fullAccess;
-                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
-                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
-                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
-                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
-                    $scope.myData.enableGridMenu = true;
-                    $scope.myData.enableCellEditOnFocus = true;
-                    $scope.myData.enableFiltering = true;
-                    $scope.myData.exporterMenuPdf = false;
-                    $scope.myData.exporterCsvFilename = 'myFile.csv';
+                    $scope.ordersGridData.columnDefs = self.fullAccess;
+                    $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.ordersGridData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.ordersGridData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.ordersGridData.enableGridMenu = true;
+                    $scope.ordersGridData.enableCellEditOnFocus = true;
+                    $scope.ordersGridData.enableFiltering = true;
+                    $scope.ordersGridData.exporterMenuPdf = false;
+                    $scope.ordersGridData.exporterCsvFilename = 'myFile.csv';
 
                     break;
                 case "insert":
-                    $scope.myData.columnDefs = self.fullAccess;
-                    $scope.myData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-
-                    $scope.myData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-                    $scope.myData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
-                    $scope.myData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
-                    $scope.myData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
-                    $scope.myData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
-                    $scope.myData.enableGridMenu = true;
-                    $scope.myData.enableCellEditOnFocus = true;
-                    $scope.myData.enableFiltering = true;
-                    $scope.myData.exporterMenuPdf = false;
-                    $scope.myData.exporterCsvFilename = 'myFile.csv';
-
+                    $scope.ordersGridData.columnDefs = self.fullAccess;
+                    $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
+                    $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
+                    $scope.ordersGridData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
+                    $scope.ordersGridData.columnDefs[13].editDropdownOptionsArray = $scope.colorsValue;
+                    $scope.ordersGridData.enableGridMenu = true;
+                    $scope.ordersGridData.enableCellEditOnFocus = true;
+                    $scope.ordersGridData.enableFiltering = true;
+                    $scope.ordersGridData.exporterMenuPdf = false;
+                    $scope.ordersGridData.exporterCsvFilename = 'myFile.csv';
+                    $scope.orderAddFlag = false;
                     break;
                 default:
-                    $scope.myData.columnDefs = self.readOnlyAccess;
-                    $scope.myData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
-                    $scope.myData.columnDefs[3].filter.selectOptions = $scope.customersValue;
-                    $scope.myData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
-                    $scope.myData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
-                    $scope.myData.columnDefs[11].filter.selectOptions = $scope.typesValue;
-                    $scope.myData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
-                    $scope.myData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
-                    $scope.myData.enableCellEdit = false;
-                    $scope.myData.enableFiltering = true;
-                    $scope.myData.enableSelectAll = true;
-                    $scope.myData.enableGridMenu = true;
-                    $scope.myData.exporterMenuPdf = false;
+                    $scope.ordersGridData.columnDefs = self.readOnlyAccess;
+                    $scope.ordersGridData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
+                    $scope.ordersGridData.columnDefs[3].filter.selectOptions = $scope.customersValue;
+                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
+                    $scope.ordersGridData.columnDefs[11].filter.selectOptions = $scope.typesValue;
+                    $scope.ordersGridData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
+                    $scope.ordersGridData.columnDefs[13].filter.selectOptions = $scope.colorsValue;
+                    $scope.ordersGridData.enableCellEdit = false;
+                    $scope.ordersGridData.enableFiltering = true;
+                    $scope.ordersGridData.enableSelectAll = true;
+                    $scope.ordersGridData.enableGridMenu = true;
+                    $scope.ordersGridData.exporterMenuPdf = false;
+                    $scope.orderAddFlag = true;
                     break;
 
             }
         };
 //------------------------------------------------------------------------------
-        $scope.showNotes = function (row) {
-            alert(row.entity.orderNotes);
-        };
-        $scope.addNewOrder = function () {
-            alert('New Order!!!');
-        };
 
         $scope.statusNameClass = function (row) {
             if (row.entity.status === 'None') {
@@ -161,21 +158,20 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             }
         };
 
-  
-
-  $scope.animationsEnabled = true;
-
-        $scope.open = function (size, orderSourceId, userAccess) {
+        $scope.openNotesModalWindow = function (size, orderSourceId, userAccess) {
             console.info(orderSourceId);
             console.info(userAccess);
             var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                template:'<div order-notes type="'+userAccess+'"></div>',
+                animation: true,
+                template: '<div order-notes type="' + userAccess + '"></div>',
                 controller: 'orderNotesModalController',
                 size: size,
                 resolve: {
                     orderId: function () {
                         return orderSourceId;
+                    },
+                    userStatus: function () {
+                        return userAccess;
                     }
                 }
             });
@@ -183,7 +179,47 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
             }, function () {
-                console.info('Modal dismissed at: ' + new Date());
+                console.info('OpenNotesModalWindow dismissed at: ' + new Date());
+            });
+        };
+
+
+        $scope.openOrderAddModalWindow = function (size) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                template: '<div add-new-order></div>',
+                controller: 'addNewOrderModalController',
+                size: size,
+                resolve: {
+
+                    orderModules: function () {
+                        return $scope.modulesValue;
+                    },
+                    orderColors: function () {
+                        return $scope.colorsValue;
+                    },
+                    orderTypes: function () {
+                        return $scope.typesValue;
+                    },
+                    orderDiameters: function () {
+                        return $scope.diametersValue;
+                    },
+                    orderCustomers: function () {
+                        return $scope.customersValue;
+                    },
+                    orderThreads: function () {
+                        return $scope.threadsValue;
+                    },
+                    orderParameters: function(){
+                        return $scope.orderParameters;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                console.info('openOrderAddModalWindow dismissed at: ' + new Date());
             });
         };
 
@@ -191,7 +227,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
 
         self.fullAccess = [
-            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.open(\'lg\', row.entity.id, grid.appScope.user_access)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
+            {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.openNotesModalWindow(\'lg\', row.entity.id, grid.appScope.user_access)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
             {name: 'status', displayName: 'Status', pinnedLeft: true, enableCellEdit: true, enableColumnMenu: false, width: 80
                 , filter: {type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
@@ -301,7 +337,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             var promise = ordersService.Orders().update(self.packingData(rowEntity)).$promise;
             $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
         };
-        $scope.myData.onRegisterApi = function (gridApi) {
+        $scope.ordersGridData.onRegisterApi = function (gridApi) {
             //set gridApi on scope
             $scope.gridApi = gridApi;
             gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
@@ -315,32 +351,13 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             self.fetchAllThreadsValue();
             self.fetchAllStatuses();
             self.fetchAllOrders();
-            $scope.myData.data = self.orders;
+            $scope.ordersGridData.data = self.orders;
         };
         self.checkAccess = function (userAccess) {
             console.log(userAccess);
         };
+
         self.initOrdersGrid();
-//        self.fetchAllOrders = function () {
-//            ordersService.fetchAllOrders()
-//                    .then(
-//                            function (response) {
-//                                $scope.status = response.status;
-//                                data_source = response.data;
-//                                user_access = data_source.users;
-//                                $scope.statusText = response.statusText;
-//                                console.log("Status Code: " + $scope.status + "  " + $scope.statusText + " " + user_access);
-//                                console.log(data_source);
-//                                self.biuldData(data_source.orders);
-//                                self.checkAccess(response.data.users);
-//                                $scope.myData.data = self.orders;
-//                            },
-//                            function (errResponse) {
-//                                $scope.myData.data = errResponse.data || "Request failed";
-//                                $scope.status = errResponse.status;
-//                            }
-//                    );
-//        };
 
         self.biuldData = function (OrderSourceData) {
 
@@ -350,7 +367,9 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 for (j = 0; j < OrderSourceData[i].orderParameterses.length; j++) {
                     parameters[OrderSourceData[i].orderParameterses[j].paramName] = OrderSourceData[i].orderParameterses[j].paramValue;
                 }
-
+                
+                $scope.orderParameters.push(parameters);
+                
                 parameters.id = OrderSourceData[i].id;
                 parameters.orderData = OrderSourceData[i].orderData;
                 parameters.customer = OrderSourceData[i].customer;
@@ -364,6 +383,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 parameters.delivery = OrderSourceData[i].delivery;
                 parameters.status = OrderSourceData[i].status;
                 parameters.orderNotes = OrderSourceData[i].orderNotes;
+                
                 self.orders.push(parameters);
             }
 

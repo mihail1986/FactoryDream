@@ -17,22 +17,22 @@ public class NoteUpdateRest {
 
     @NotNull
     @Min(1)
-    private Long noteId;
+    private long noteId;
 
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9\\.\\s\"\'\\,\\!]*$}")
     private String noteConntent;
 
-    public NoteUpdateRest(Long noteId, String noteConntent) {
+    public NoteUpdateRest(long noteId, String noteConntent) {
         this.noteId = noteId;
         this.noteConntent = noteConntent;
     }
 
-    public Long getNoteId() {
+    public long getNoteId() {
         return noteId;
     }
 
-    public void setNoteId(Long noteId) {
+    public void setNoteId(long noteId) {
         this.noteId = noteId;
     }
 

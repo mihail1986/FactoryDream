@@ -15,6 +15,7 @@ public class OrderNoteRest {
     private String nameGroups;
     private String note;
     private String firstName;
+    //"id":3,"nameGroups":"Customer","note":"Note 1.2 New note","firstName":"Victor Zaitev"}
 
     public OrderNoteRest(long id, String nameGroups, String note, String firstName) {
         this.id = id;

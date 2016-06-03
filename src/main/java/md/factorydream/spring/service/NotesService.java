@@ -21,4 +21,6 @@ public interface NotesService {
     public List findAll();
 
     public boolean update(NoteUpdateRest noteUpdateRest, Users users);
+
+    public void delete(Long noteId);
 }

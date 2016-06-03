@@ -19,29 +19,35 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class NotesServiceImpl implements NotesService {
-
+    
     private NotesDAO notesDAO;
-
+    
     public void setNotesDAO(NotesDAO notesDAO) {
         this.notesDAO = notesDAO;
     }
-
+    
     @Override
     @Transactional
     public void save(Notes notes) {
         notesDAO.save(notes);
     }
-
+    
     @Override
     @Transactional
     public List findAll() {
         return notesDAO.findAll();
     }
-
+    
     @Override
     @Transactional
     public boolean update(NoteUpdateRest noteUpdateRest, Users users) {
         return notesDAO.update(noteUpdateRest, users);
     }
-
+    
+    @Override
+    @Transactional
+    public void delete(Long noteId) {
+        notesDAO.delete(noteId);
+    }
+    
 }

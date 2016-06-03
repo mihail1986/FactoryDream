@@ -54,4 +54,20 @@ public class NotesDAOImpl extends AbstractSpringDao implements NotesDAO {
         return true;
     }
 
+    @Override
+    public void delete(Long noteId) {
+
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery(" from Notes notes where notes.id =:NoteId ");
+        query.setLong("NoteId", noteId);
+
+        List list = query.list();
+
+        if (list != null && list.size() > 0) {
+            Notes notes = (Notes) list.get(0);
+            session.delete(notes);
+        }
+
+    }
+
 }

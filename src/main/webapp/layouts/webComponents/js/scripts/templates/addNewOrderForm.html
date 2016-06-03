@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h3 class="modal-title pull-left">Notes</h3>
+    <button type="button" ng-show="addNoteButtonFlag" ng-model="addNoteButtonFlag" class="btn btn-sm btn-info pull-right" ng-click="showNoteFrom()">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add New Note
+    </button>
+    <div class="clear-both"></div>
+</div>
+<div class="modal-body">
+
+    <form class="form-horizontal">
+
+        <div class="form-group form-group-sm">
+            <label class="col-sm-2 control-label" for="OrderData">Data</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" id="OrderData" placeholder="Data">
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="closeModal()">Close</button>
+</div>

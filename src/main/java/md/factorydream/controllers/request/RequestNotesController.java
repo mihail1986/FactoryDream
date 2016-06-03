@@ -5,7 +5,9 @@
  */
 package md.factorydream.controllers.request;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.validation.Valid;
 import md.factorydream.constant.AccessNameConst;
 import md.factorydream.constant.StatusCodeConst;
@@ -19,6 +21,7 @@ import md.factorydream.entites.StatusCod;
 import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.NoteInsertRest;
 import md.factorydream.entites.rest.NoteUpdateRest;
+import md.factorydream.entites.rest.OrderNoteRest;
 import md.factorydream.spring.service.NoteGroupsService;
 import md.factorydream.spring.service.NotesService;
 import md.factorydream.spring.service.OrdersNoteService;
@@ -26,9 +29,11 @@ import md.factorydream.spring.service.OrdersService;
 import md.factorydream.spring.service.RoleAccessSevice;
 import md.factorydream.spring.service.StatusCodService;
 import md.factorydream.spring.service.UsersService;
+import md.factorydream.util.Autorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +42,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -45,11 +51,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class RequestNotesController {
-
-    //RoleAccess Service which will do all data retrieval/manipulation work
-    @Autowired
-    @Qualifier(value = "roleAccessSevice")
-    private RoleAccessSevice roleAccessSevice;
 
     @Autowired
     @Qualifier(value = "notesService")
@@ -79,32 +80,35 @@ public class RequestNotesController {
 
 //------------------- Update a Notes --------------------------------------------------------
     @RequestMapping(value = "/update/notes", method = RequestMethod.POST)
-    public ResponseEntity<NoteUpdateRest> updateNotes(@Valid @RequestBody NoteUpdateRest noteUpdateRest, BindingResult bindingResult) {
+    public ResponseEntity<Object> updateNotes(@Valid @RequestBody Object noteUpdateRest, BindingResult bindingResult) {
 
-        System.out.println(" Note Id " + noteUpdateRest.getNoteId());
-        System.out.println(" Note Content " + noteUpdateRest.getNoteConntent());
+//        System.out.println(" Note Id " + noteUpdateRest.getNoteId());
+//        System.out.println(" Note Content " + noteUpdateRest.getNoteConntent());
+        System.err.println("I'm inside!!!!");
 
-        if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        NoteUpdateRest nur = (NoteUpdateRest) noteUpdateRest;
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
+        System.err.println(noteUpdateRest.toString());
+//        if (bindingResult.hasFieldErrors()) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName();
+//
+//        Users users = usersService.findUserByLogin(name);
+//
+//        if (users == null) {
+//            throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
+//        }
 
-        Users users = usersService.findUserByLogin(name);
-
-        if (users == null) {
-            throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
-        }
-
-        if (isAutorization(name, "/rest/orders", false)) {
-            if (!notesService.update(noteUpdateRest, users)) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
+//        if (Autorization.isAutorization(name, "/rest/orders", "update")) {
+//            if (!notesService.update(noteUpdateRest, users)) {
+//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            }
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
         return new ResponseEntity<>(noteUpdateRest, HttpStatus.OK);
 
     }
@@ -126,7 +130,7 @@ public class RequestNotesController {
             throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
         }
 
-        if (isAutorization(name, "/rest/orders", true)) {
+        if (Autorization.isAutorization(name, "/rest/orders", "save")) {
 
             StatusCod statusCod = statusCodService.findStatusCodByCodName(StatusCodeConst.COD_NAME_ENABLE);
 
@@ -159,30 +163,30 @@ public class RequestNotesController {
         }
 
         return new ResponseEntity<>(noteInsertRest, HttpStatus.OK);
-
     }
 
     //----------------------------------------------------------------------------------------------------------
-    private boolean isAutorization(String name, String url, boolean isSave) {
+    @RequestMapping(value = "/delete/notes", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> deleteNotes(@RequestParam long note) {
 
-        RoleAccess roleAccess = roleAccessSevice.findRoleAccessByUserNameAndUrl(name, url);
-
-        if (roleAccess == null) {
-            return false;
+        if (note <= 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        switch (roleAccess.getAccess().getAccessName()) {
-            case AccessNameConst.ACCESS_NAME_READ: {
-                return false;
-            }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
 
-            case AccessNameConst.ACCESS_NAME_UPDATE: {
-                if (isSave) {
-                    return false;
-                }
-            }
+        Users users = usersService.findUserByLogin(name);
+
+        if (users == null) {
+            throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
         }
-        return true;
+        if (Autorization.isAutorization(name, "/rest/orders", "delete")) {
+            notesService.delete((long) note);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 }

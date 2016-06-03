@@ -6,11 +6,16 @@ body {
     margin-top: 25%;
 }
 
-.non-resize {
+textarea.non-resize {
      resize: none;
      min-height: 50px;
+     margin-bottom: 5px !important;
 }
 
 .clear-both{
      clear: both;
+}
+
+.modal-table{
+    margin-bottom: 0px !important;
 }

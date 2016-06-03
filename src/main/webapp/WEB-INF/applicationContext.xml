@@ -242,4 +242,12 @@
         <property name="groupNotesDAO" ref="groupNotesDAO"></property>
     </bean>
     
+    <bean id="springDAO" class="md.factorydream.spring.dao.SpringDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="springService" class="md.factorydream.spring.service.SpringServiceImpl">
+        <property name="springDAO" ref="springDAO"></property>
+    </bean>
+    
 </beans>
