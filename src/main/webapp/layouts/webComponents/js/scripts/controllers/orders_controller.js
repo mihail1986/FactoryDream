@@ -56,7 +56,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             });
         };
 
-
         self.fetchAllOrders = function () {
             ordersService.Orders().query().$promise.then(function (result) {
                 $scope.user_access = result[0].userAccess;
@@ -64,6 +63,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 self.initOrderGridColumn($scope.user_access);
             });
         };
+        
         self.initOrderGridColumn = function (userAccess) {
 
             switch (userAccess) {
@@ -191,7 +191,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 controller: 'addNewOrderModalController',
                 size: size,
                 resolve: {
-
                     orderModules: function () {
                         return $scope.modulesValue;
                     },
@@ -209,9 +208,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     },
                     orderThreads: function () {
                         return $scope.threadsValue;
-                    },
-                    orderParameters: function(){
-                        return $scope.orderParameters;
                     }
                 }
             });
@@ -224,7 +220,6 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         };
 
 //------------------------------------------------------------------------------
-
 
         self.fullAccess = [
             {name: 'orderNotes', displayName: 'Notes', pinnedLeft: true, enableCellEdit: false, enableColumnMenu: false, enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><button class="btn btn-primary btn-xs" ng-click="grid.appScope.openNotesModalWindow(\'lg\', row.entity.id, grid.appScope.user_access)"><span class="badge btn-xs">{{COL_FIELD}}</span> Notes</button></div>', width: 80},
@@ -256,7 +251,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 , editDropdownIdLabel: 'value'
                 , editDropdownValueLabel: 'label'
             },
-            {name: 'T', displayName: 'T', enableColumnMenu: false, width: 80},
+            {name: 'Thickness', displayName: 'T', enableColumnMenu: false, width: 80},
             {name: 'LB/FT', displayName: 'Lb/Ft', enableColumnMenu: false, width: 80},
             {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80
                 , filter: {type: uiGridConstants.filter.SELECT}
@@ -312,7 +307,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             {name: 'model', displayName: 'Model', enableColumnMenu: false, width: 80
                 , filter: {type: uiGridConstants.filter.SELECT}
             },
-            {name: 'T', displayName: 'T', enableColumnMenu: false, width: 80},
+            {name: 'Thickness', displayName: 'T', enableColumnMenu: false, width: 80},
             {name: 'LB/FT', displayName: 'Lb/Ft', enableColumnMenu: false, width: 90},
             {name: 'diameter', displayName: 'Diametru', enableColumnMenu: false, width: 80
                 , filter: {type: uiGridConstants.filter.SELECT}
@@ -366,10 +361,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 var parameters = {};
                 for (j = 0; j < OrderSourceData[i].orderParameterses.length; j++) {
                     parameters[OrderSourceData[i].orderParameterses[j].paramName] = OrderSourceData[i].orderParameterses[j].paramValue;
-                }
-                
-                $scope.orderParameters.push(parameters);
-                
+                }                
                 parameters.id = OrderSourceData[i].id;
                 parameters.orderData = OrderSourceData[i].orderData;
                 parameters.customer = OrderSourceData[i].customer;

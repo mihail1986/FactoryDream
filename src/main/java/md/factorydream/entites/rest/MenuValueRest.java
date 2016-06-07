@@ -6,7 +6,6 @@
 package md.factorydream.entites.rest;
 
 import java.util.List;
-import javax.persistence.Column;
 
 /**
  *

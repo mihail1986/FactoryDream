@@ -22,16 +22,14 @@ public class NoteInsertRest {
     @NotNull
     @Min(1)
     private short noteGroupId;
-    private Long noteId;
-
+    
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9\\.\\s\"\'\\,\\!]*$}")
     private String noteConntent;
 
-    public NoteInsertRest(long orderId, short noteGroupId, Long noteId, String noteConntent) {
+    public NoteInsertRest(long orderId, short noteGroupId, String noteConntent) {
         this.orderId = orderId;
         this.noteGroupId = noteGroupId;
-        this.noteId = noteId;
         this.noteConntent = noteConntent;
     }
 
@@ -49,14 +47,6 @@ public class NoteInsertRest {
 
     public void setNoteGroupId(short noteGroupId) {
         this.noteGroupId = noteGroupId;
-    }
-
-    public Long getNoteId() {
-        return noteId;
-    }
-
-    public void setNoteId(Long noteId) {
-        this.noteId = noteId;
     }
 
     public String getNoteConntent() {

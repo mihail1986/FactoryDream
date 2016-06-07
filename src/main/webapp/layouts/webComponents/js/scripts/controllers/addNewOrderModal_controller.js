@@ -4,21 +4,16 @@
  *  Author     : Mihail.Cepraga
  */
 
-angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', '$uibModalInstance', 'orderModules', 'orderColors', 'orderTypes', 'orderDiameters', 'orderCustomers', 'orderThreads', 'orderParameters', function ($scope, $uibModalInstance, orderId, userStatus, orderModules, orderColors, orderTypes, orderDiameters, orderCustomers, orderThreads, orderParameters) {
+angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', '$uibModalInstance', 'orderModules', 'orderColors', 'orderTypes', 'orderDiameters', 'orderCustomers', 'orderThreads', function ($scope, $uibModalInstance, orderModules, orderColors, orderTypes, orderDiameters, orderCustomers, orderThreads) {
 
         var self = this;
-//        self.orderId = orderId;
-//        self.userStatus = userStatus;
         $scope.newOrderCustomer = orderCustomers;
+        $scope.neworderModules = orderModules;
+        $scope.neworderColors = orderColors;
+        $scope.neworderTypes = orderTypes;
+        $scope.neworderDiameters = orderDiameters;
+        $scope.neworderThreads = orderThreads;
         
-        console.info(angular.toJson(orderModules)); 
-        console.info(angular.toJson(orderColors));
-        console.info(angular.toJson(orderTypes));
-        console.info(angular.toJson(orderDiameters));
-        console.info(angular.toJson(orderCustomers));
-        console.info(angular.toJson(orderThreads));
-        console.info(angular.toJson(orderParameters));
-
 
         $scope.closeModal = function () {
             $uibModalInstance.close('close');

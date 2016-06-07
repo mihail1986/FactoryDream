@@ -5,8 +5,10 @@
  */
 package md.factorydream.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import md.factorydream.entites.NoteGroups;
+import md.factorydream.entites.rest.NoteGroupsValueRest;
 import md.factorydream.spring.dao.NoteGroupsDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,5 +43,25 @@ public class NoteGroupsServiceImpl implements NoteGroupsService {
     public NoteGroups findNoteGroupsById(long id) {
         return noteGroupsDAO.findNoteGroupsById(id);
     }
+
+    @Override
+    public List findAllNoteGroupsRest() {
+
+        List noteGroupsValueRestList = new ArrayList();
+
+        List noteGroupsList = findAll();
+
+        for (Object noteGroups : noteGroupsList) {
+            NoteGroups noteGroup = (NoteGroups) noteGroups;
+
+            NoteGroupsValueRest noteGroupsValueRest = new NoteGroupsValueRest(noteGroup.getId(), noteGroup.getName());
+            noteGroupsValueRestList.add(noteGroupsValueRest);
+        }
+
+        return noteGroupsValueRestList;
+
+    }
+    
+    
 
 }

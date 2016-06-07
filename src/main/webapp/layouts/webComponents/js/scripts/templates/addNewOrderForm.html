@@ -9,14 +9,49 @@
 <div class="modal-body">
 
     <form class="form-horizontal">
-
         <div class="form-group form-group-sm">
             <label class="col-sm-2 control-label" for="OrderData">Data</label>
             <div class="col-sm-10">
                 <input class="form-control" type="text" id="OrderData" placeholder="Data">
             </div>
         </div>
-
+        <div class="form-group form-group-sm">
+            <label for="Customer" class="col-sm-2 control-label">Customer</label>
+            <div class="col-sm-10">
+                <select id="Customer" class="form-control" ng-model="newOrder.customer" ng-options="customer.label for customer in newOrderCustomer"></select>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="Module" class="col-sm-2 control-label">Module</label>
+            <div class="col-sm-10">
+                <select id="Module" class="form-control" ng-model="newOrder.module" ng-options="model.label for model in neworderModules"></select>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="Color" class="col-sm-2 control-label">Color</label>
+            <div class="col-sm-10">
+                <select id="Color" class="form-control" ng-model="newOrder.color" ng-options="color.label for color in neworderColors"></select>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="Type" class="col-sm-2 control-label">Type</label>
+            <div class="col-sm-10">
+                <select id="Type" class="form-control" ng-model="newOrder.type" ng-options="type.label for type in neworderTypes"></select>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="Diameter" class="col-sm-2 control-label">Diameter</label>
+            <div class="col-sm-10">
+                <select id="Diameter" class="form-control" ng-model="newOrder.diameter" ng-options="diameter.label for diameter in neworderDiameters"></select>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="Thread" class="col-sm-2 control-label">Thread</label>
+            <div class="col-sm-10">
+                <select id="Thread" class="form-control" ng-model="newOrder.thread" ng-options="thread.label for thread in neworderThreads"></select>
+            </div>
+        </div>
+        {{newOrder}}
     </form>
 
 </div>

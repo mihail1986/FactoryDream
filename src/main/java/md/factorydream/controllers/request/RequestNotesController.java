@@ -80,13 +80,13 @@ public class RequestNotesController {
 
 //------------------- Update a Notes --------------------------------------------------------
     @RequestMapping(value = "/update/notes", method = RequestMethod.POST)
-    public ResponseEntity<Object> updateNotes(@Valid @RequestBody Object noteUpdateRest, BindingResult bindingResult) {
+    public ResponseEntity<NoteUpdateRest> updateNotes(@Valid @RequestBody NoteUpdateRest noteUpdateRest, BindingResult bindingResult) {
 
 //        System.out.println(" Note Id " + noteUpdateRest.getNoteId());
 //        System.out.println(" Note Content " + noteUpdateRest.getNoteConntent());
         System.err.println("I'm inside!!!!");
 
-        NoteUpdateRest nur = (NoteUpdateRest) noteUpdateRest;
+      //  NoteUpdateRest nur = (NoteUpdateRest) noteUpdateRest;
 
         System.err.println(noteUpdateRest.toString());
 //        if (bindingResult.hasFieldErrors()) {
@@ -117,50 +117,54 @@ public class RequestNotesController {
     @RequestMapping(value = "/save/notes", method = RequestMethod.POST)
     public ResponseEntity<NoteInsertRest> saveNotes(@Valid @RequestBody NoteInsertRest noteInsertRest, BindingResult bindingResult) {
 
-        if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-
-        Users users = usersService.findUserByLogin(name);
-
-        if (users == null) {
-            throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
-        }
-
-        if (Autorization.isAutorization(name, "/rest/orders", "save")) {
-
-            StatusCod statusCod = statusCodService.findStatusCodByCodName(StatusCodeConst.COD_NAME_ENABLE);
-
-            Orders orders = ordersService.findOrdersById(noteInsertRest.getOrderId());
-            NoteGroups notesGroup = noteGroupsService.findNoteGroupsById(noteInsertRest.getNoteGroupId());
-
-            Notes notes = new Notes();
-            notes.setNote(noteInsertRest.getNoteConntent());
-            notes.setUsers(users);
-            notes.setLastUpdateDate(new Date());
-            notes.setStatusCod(statusCod);
-
-            GroupNotes groupNotes = new GroupNotes();
-            groupNotes.setNotes(notes);
-            groupNotes.setNoteGroups(notesGroup);
-            groupNotes.setLastUpdateDate(new Date());
-            groupNotes.setUsers(users);
-
-            OrderNote orderNote = new OrderNote();
-            orderNote.setGroupNotes(groupNotes);
-            orderNote.setLastUpdateDate(new Date());
-            orderNote.setOrders(orders);
-            orderNote.setUsers(users);
-
-            if (!ordersNoteService.save(notes, groupNotes, orderNote)) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+        
+        System.out.println("---------**------- Inside of \"/save/notes\" -------------------");
+        System.out.println(noteInsertRest.toString());
+        
+//        if (bindingResult.hasFieldErrors()) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName();
+//
+//        Users users = usersService.findUserByLogin(name);
+//
+//        if (users == null) {
+//            throw new UsernameNotFoundException("Asa utilizator nu exista in baza de date");
+//        }
+//
+//        if (Autorization.isAutorization(name, "/rest/orders", "save")) {
+//
+//            StatusCod statusCod = statusCodService.findStatusCodByCodName(StatusCodeConst.COD_NAME_ENABLE);
+//
+//            Orders orders = ordersService.findOrdersById(noteInsertRest.getOrderId());
+//            NoteGroups notesGroup = noteGroupsService.findNoteGroupsById(noteInsertRest.getNoteGroupId());
+//
+//            Notes notes = new Notes();
+//            notes.setNote(noteInsertRest.getNoteConntent());
+//            notes.setUsers(users);
+//            notes.setLastUpdateDate(new Date());
+//            notes.setStatusCod(statusCod);
+//
+//            GroupNotes groupNotes = new GroupNotes();
+//            groupNotes.setNotes(notes);
+//            groupNotes.setNoteGroups(notesGroup);
+//            groupNotes.setLastUpdateDate(new Date());
+//            groupNotes.setUsers(users);
+//
+//            OrderNote orderNote = new OrderNote();
+//            orderNote.setGroupNotes(groupNotes);
+//            orderNote.setLastUpdateDate(new Date());
+//            orderNote.setOrders(orders);
+//            orderNote.setUsers(users);
+//
+//            if (!ordersNoteService.save(notes, groupNotes, orderNote)) {
+//                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//            }
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
 
         return new ResponseEntity<>(noteInsertRest, HttpStatus.OK);
     }

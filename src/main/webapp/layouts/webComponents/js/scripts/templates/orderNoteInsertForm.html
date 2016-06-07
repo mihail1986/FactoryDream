@@ -1,13 +1,13 @@
 <div class="form-group">
     <label for="Parameter" class="col-sm-2 control-label">Parameter</label>
     <div class="col-sm-10">
-        <select id="Parameter" class="form-control" ng-model="noteParameter" ng-options="note.nameGroups for note in gridOrderNotes"></select>
+        <select id="Parameter" class="form-control" ng-model="newNote.parameter" ng-options="group.label for group in noteGroups"></select>
     </div>
 </div>
 <div class="form-group">
     <label for="noteConntent" class="col-sm-2 control-label">Note</label>
     <div class="col-sm-10">
-        <textarea class="form-control non-resize" id="noteConntent" placeholder="Note Conntent..." ></textarea>
+        <textarea class="form-control non-resize" ng-model="newNote.noteConntent" id="noteConntent" placeholder="Note Conntent..." ></textarea>
     </div>
 </div>
 <div class="form-group modal-table">
@@ -15,3 +15,4 @@
         <button type="button" ng-click="addNewNote(false)" class="btn btn-sm btn-primary pull-right">Add</button>
     </div>
 </div>
+{{newNote}}

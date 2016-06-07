@@ -4,38 +4,46 @@
  *  Author     : Mihail.Cepraga
  */
 
-angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '$uibModalInstance', 'orderId', 'userStatus', 'orderNotesService', function ($scope, $uibModalInstance, orderId, userStatus, orderNotesService) {
+angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '$uibModalInstance', 'orderId', 'userStatus', 'orderNotesService', 'noteGroupsService', function ($scope, $uibModalInstance, orderId, userStatus, orderNotesService, noteGroupsService) {
 
         var self = this;
         self.orderId = orderId;
         self.userStatus = userStatus;
-        
+
         $scope.gridOrderNotes = {};
         $scope.addNoteButtonFlag = true;
         $scope.addNoteFormFlag = false;
         $scope.deleteNoteFlag = false;
         $scope.editNoteFlag = false;
         $scope.newNote = {};
-        $scope.noteGroups;
-        
+        $scope.noteGroups = {};
+
         switch (self.userStatus) {
-                case "full":
-                    $scope.addNoteButtonFlag = true;
-                    $scope.deleteNoteFlag = true;
-                  break;
-                case "insert":
-                    $scope.addNoteButtonFlag = true;
-                    $scope.deleteNoteFlag = false;
-                  break;
-                default:
-                    $scope.addNoteButtonFlag = false;
-                    $scope.deleteNoteFlag = false;
-                  break;
-            };
+            case "full":
+                $scope.addNoteButtonFlag = true;
+                $scope.deleteNoteFlag = true;
+                break;
+            case "insert":
+                $scope.addNoteButtonFlag = true;
+                $scope.deleteNoteFlag = false;
+                break;
+            default:
+                $scope.addNoteButtonFlag = false;
+                $scope.deleteNoteFlag = false;
+                break;
+        }
+        ;
+
+        self.fetchAllNoteGroupsService = function () {
+            $scope.noteGroups = noteGroupsService.NoteGroups().query();
+        };
 
         self.fetchAllOrderNotesService = function () {
 
             $scope.gridOrderNotes = orderNotesService.OrderNotes().query({idCod: self.orderId});
+            
+            self.fetchAllNoteGroupsService();
+            
         };
 
         self.fetchAllOrderNotesService();
@@ -48,17 +56,14 @@ angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '
         };
 
         $scope.updateNote = function (row) {
-                  
-            
-//             orderNotesService.noteUpdate(self.buildNoteDataToUpdate(row));
+
             orderNotesService.OrderNotes().update(self.buildNoteDataToUpdate(row));
         };
-        
+
         $scope.showNoteFrom = function () {
             $scope.addNoteButtonFlag = false;
             $scope.editNoteFlag = true;
             $scope.addNoteFormFlag = true;
-
             console.info("showNoteFrom");
         };
 
@@ -66,7 +71,17 @@ angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '
             $scope.addNoteButtonFlag = true;
             $scope.addNoteFormFlag = false;
             $scope.editNoteFlag = false;
-            console.info("addNewNote");
+            
+            var note = {};
+            note.orderId = self.orderId;
+            note.noteGroupId = $scope.newNote.parameter.value;
+            note.noteConntent = $scope.newNote.noteConntent;
+            
+            console.info("------- was added newNote ------------");
+            console.info(note);
+            
+            orderNotesService.OrderNotes().create(note);
+            
         };
 
         $scope.closeModal = function () {
@@ -74,14 +89,14 @@ angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '
         };
 
         self.buildNoteDataToUpdate = function (note) {
-            
+
             var noteToUpdate = {};
-            
+
             console.info(note);
-            
+
             noteToUpdate.noteId = note.id;
             noteToUpdate.noteConntent = note.note;
-            
+
             console.info(noteToUpdate);
             return noteToUpdate;
         };

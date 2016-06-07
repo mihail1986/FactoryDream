@@ -21,7 +21,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-filter"></span> Filtrare Avansata</a></li>
         <li><a href="#">Link</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -41,7 +41,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading"><span class="lead">List of Orders </span>
-                    <button type="button" ng-model="orderAddFlag" ng-hide="orderAddFlag" id="addData" class="btn btn-info pull-right" ng-click="openOrderAddModalWindow('lg')"><span class="glyphicon glyphicon-plus"></span> Add New Order</button>
+                    <button type="button" ng-model="orderAddFlag" ng-hide="orderAddFlag" id="addData" class="btn btn-info pull-right btn-sm" ng-click="openOrderAddModalWindow('lg')"><span class="glyphicon glyphicon-plus"></span><span class="hidden-xs"> Add New Order</span></button>
                 </div>
                 <div class="tablecontainer">
 
@@ -73,6 +73,7 @@
 <script src="js/scripts/services/thread_service.js"></script>
 <script src="js/scripts/services/status_service.js"></script>
 <script src="js/scripts/services/orderNotes_service.js"></script>
+<script src="js/scripts/services/noteGroups_service.js"></script>
 <script src="js/scripts/controllers/orderNotesModal_controller.js"></script>
 <script src="js/scripts/controllers/addNewOrderModal_controller.js"></script>
 <script src="js/scripts/directives/orderNotes_directives.js"></script>

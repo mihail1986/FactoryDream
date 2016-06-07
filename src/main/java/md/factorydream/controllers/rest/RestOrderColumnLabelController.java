@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Zaițev.Victor
  */
 @RestController
-public class RestSpringController {
+public class RestOrderColumnLabelController {
 
     //Orders Service which will do all data retrieval/manipulation work
     @Autowired(required = true)

@@ -250,4 +250,20 @@
         <property name="springDAO" ref="springDAO"></property>
     </bean>
     
+    <bean id="paramNamesDAO" class="md.factorydream.spring.dao.ParamNamesDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="paramNamesService" class="md.factorydream.spring.service.ParamNamesServiceImpl">
+        <property name="paramNamesDAO" ref="paramNamesDAO"></property>        
+    </bean>
+    
+    <bean id="orderParametersDAO" class="md.factorydream.spring.dao.OrderParametersDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean id="orderParametersService" class="md.factorydream.spring.service.OrderParametersServiceImpl">
+        <property name="orderParametersDAO" ref="orderParametersDAO"></property>
+    </bean>
+    
 </beans>

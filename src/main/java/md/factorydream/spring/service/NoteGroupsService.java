@@ -19,4 +19,7 @@ public interface NoteGroupsService {
     public List findAll();
 
     public NoteGroups findNoteGroupsById(long id);
+
+    public List findAllNoteGroupsRest();
+
 }

@@ -20,6 +20,9 @@
         
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Bootstrap theme CSS -->
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
         <!-- UI-Grid Core CSS -->
         <link href="css/cssGrid/ui-grid.min.css" rel="styleSheet">

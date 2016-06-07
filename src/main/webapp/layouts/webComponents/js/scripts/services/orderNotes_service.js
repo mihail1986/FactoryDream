@@ -12,10 +12,10 @@ angular.module('ordersApp').factory('orderNotesService', ['$resource', '$q', '$h
             OrderNotes: function () {
                 return $resource("/FactoryDream/rest/orderNotes", {}, {
                     query: {method: "GET", isArray: true, url: "/FactoryDream/rest/orderNotes?orderId=:idCod"},
-                    create: {method: "POST", url: "/FactoryDream/rest/orderNotes"},
+                    create: {method: "POST", url: "/FactoryDream/save/notes"},
                     get: {method: "GET", url: "/FactoryDream/rest/orderNotes"},
                     remove: {method: "DELETE", url: "/FactoryDream/delete/notes?note=:note"},
-                    update: {method: 'POST', url: "/FactoryDream/update/notes"}
+                    update: {method: "POST", url: "/FactoryDream/update/notes"}
                 });
             },
             noteUpdate: function (note) {
