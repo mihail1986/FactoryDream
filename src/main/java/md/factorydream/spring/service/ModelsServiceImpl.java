@@ -59,4 +59,11 @@ public class ModelsServiceImpl implements ModelsService {
         return modelValuelRestList;
     }
 
+    @Override
+    @Transactional
+    public Models findModelsById(short id) {
+        return modelsDAO.findModelsById(id);
+
+    }
+
 }

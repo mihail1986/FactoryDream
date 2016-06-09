@@ -62,4 +62,9 @@ public class StatusCodDAOImpl extends AbstractSpringDao implements StatusCodDAO 
         return statusCod;
     }
 
+    @Override
+    public StatusCod findStatusCodById(short id) {
+        return (StatusCod) super.findClassById(StatusCod.class, id);
+    }
+
 }

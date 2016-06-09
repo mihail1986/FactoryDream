@@ -31,8 +31,7 @@ angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '
                 $scope.addNoteButtonFlag = false;
                 $scope.deleteNoteFlag = false;
                 break;
-        }
-        ;
+        };
 
         self.fetchAllNoteGroupsService = function () {
             $scope.noteGroups = noteGroupsService.NoteGroups().query();
@@ -41,7 +40,6 @@ angular.module('ordersApp').controller('orderNotesModalController', ['$scope', '
         self.fetchAllOrderNotesService = function () {
 
             $scope.gridOrderNotes = orderNotesService.OrderNotes().query({idCod: self.orderId});
-            
             self.fetchAllNoteGroupsService();
             
         };

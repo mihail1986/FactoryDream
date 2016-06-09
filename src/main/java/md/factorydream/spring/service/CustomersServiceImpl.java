@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import md.factorydream.entites.Customers;
+import md.factorydream.entites.rest.CustomersRest;
 import md.factorydream.entites.rest.CustomersValueRest;
 
 import org.springframework.stereotype.Service;
@@ -63,4 +64,37 @@ public class CustomersServiceImpl implements CustomersService {
         return customersValueRestList;
     }
 
+    @Override
+    public List findAllRest() {
+
+        List customersRestList = new ArrayList();
+
+        List customersList = findAll();
+
+        for (Object customers : customersList) {
+            Customers customer = (Customers) customers;
+
+            CustomersRest customersRest = new CustomersRest(
+                    customer.getId(),
+                    customer.getStatusCod().getStatuses().getName(),
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getPhone(),
+                    customer.getEmail(),
+                    customer.getCustomerDescription(),
+                    customer.getNote(),
+                    customer.getLastUpdateDate()
+            );
+            customersRestList.add(customersRest);
+        }
+
+        return customersRestList;
+
+    }
+
+    @Override
+    @Transactional
+    public Customers findCustomersById(long id) {
+        return customersDAO.findCustomersById(id);
+    }
 }

@@ -115,7 +115,7 @@ public class OrdersDAOImpl extends AbstractSpringDao implements OrdersDAO {
 
     @Override
     public Orders findOrdersById(long id) {
-        return (Orders) super.find(Orders.class, id);
+        return (Orders) super.findClassById(Orders.class, id);
     }
 
     @Override

@@ -7,9 +7,7 @@ package md.factorydream.controllers.request;
 
 import java.util.Date;
 import javax.validation.Valid;
-import md.factorydream.constant.AccessNameConst;
 import md.factorydream.entites.NoteGroups;
-import md.factorydream.entites.RoleAccess;
 import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.NoteGroupInsertRest;
 import md.factorydream.entites.rest.NoteGroupUpdateRest;

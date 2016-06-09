@@ -19,4 +19,6 @@ public interface DiametersDAO {
     public List findAll();
 
     public List findAllEnableDiameters();
+
+    public Diameters findDiametersById(short id);
 }

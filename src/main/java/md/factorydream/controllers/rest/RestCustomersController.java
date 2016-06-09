@@ -7,7 +7,7 @@ package md.factorydream.controllers.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import md.factorydream.entites.Customers;
+import md.factorydream.entites.rest.CustomersRest;
 import md.factorydream.entites.rest.CustomersValueRest;
 import md.factorydream.spring.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ public class RestCustomersController {
 
     //----------------------- Retrieve All Customers ----------------------------------------------------
     @RequestMapping(value = "/rest/customers", method = RequestMethod.GET)
-    public List<Customers> getAllCustomers() {
-        List<Customers> customersesList = (ArrayList<Customers>) customersService.findAll();
+    public List<CustomersRest> getAllCustomers() {
+        List<CustomersRest> customersesList = (ArrayList<CustomersRest>) customersService.findAllRest();
         return customersesList;
     }
 

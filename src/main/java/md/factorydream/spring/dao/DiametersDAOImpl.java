@@ -31,4 +31,9 @@ public class DiametersDAOImpl extends AbstractSpringDao implements DiametersDAO 
         return super.findAllDataEnableObject(Diameters.class);
     }
 
+    @Override
+    public Diameters findDiametersById(short id) {
+        return (Diameters) super.findClassById(Diameters.class, id);
+    }
+
 }

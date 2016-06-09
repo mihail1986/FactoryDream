@@ -5,35 +5,20 @@
  */
 package md.factorydream.controllers.request;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.validation.Valid;
-import md.factorydream.constant.AccessNameConst;
-import md.factorydream.constant.StatusCodeConst;
-import md.factorydream.entites.GroupNotes;
-import md.factorydream.entites.NoteGroups;
-import md.factorydream.entites.Notes;
-import md.factorydream.entites.OrderNote;
-import md.factorydream.entites.Orders;
-import md.factorydream.entites.RoleAccess;
-import md.factorydream.entites.StatusCod;
 import md.factorydream.entites.Users;
 import md.factorydream.entites.rest.NoteInsertRest;
 import md.factorydream.entites.rest.NoteUpdateRest;
-import md.factorydream.entites.rest.OrderNoteRest;
 import md.factorydream.spring.service.NoteGroupsService;
 import md.factorydream.spring.service.NotesService;
 import md.factorydream.spring.service.OrdersNoteService;
 import md.factorydream.spring.service.OrdersService;
-import md.factorydream.spring.service.RoleAccessSevice;
 import md.factorydream.spring.service.StatusCodService;
 import md.factorydream.spring.service.UsersService;
 import md.factorydream.util.Autorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

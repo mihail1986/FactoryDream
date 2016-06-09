@@ -61,4 +61,10 @@ public class DiametersServiceImpl implements DiametersService {
 
     }
 
+    @Override
+    @Transactional
+    public Diameters findDiametersById(short id) {
+        return diametersDAO.findDiametersById(id);
+    }
+
 }

@@ -113,8 +113,4 @@ public class RequestParamNamesController {
         return new ResponseEntity<>(paramNamesUpdateRest, HttpStatus.OK);
 
     }
-    
-    
-    
-
 }

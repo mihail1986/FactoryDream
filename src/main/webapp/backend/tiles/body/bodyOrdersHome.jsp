@@ -6,7 +6,7 @@
 
 <div ng-app="ordersApp" ng-controller="ordersController" >
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default marginBottom-0px">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -74,7 +74,8 @@
 <script src="js/scripts/services/status_service.js"></script>
 <script src="js/scripts/services/orderNotes_service.js"></script>
 <script src="js/scripts/services/noteGroups_service.js"></script>
+<script src="js/scripts/services/orderParametersNames_service.js"></script>
+<script src="js/scripts/directives/orderNotes_directives.js"></script>
 <script src="js/scripts/controllers/orderNotesModal_controller.js"></script>
 <script src="js/scripts/controllers/addNewOrderModal_controller.js"></script>
-<script src="js/scripts/directives/orderNotes_directives.js"></script>
 <script src="js/scripts/controllers/orders_controller.js"></script>

@@ -63,4 +63,9 @@ public class StatusCodServiceImpl implements StatusCodService {
         return statusCodDAO.findStatusCodByCodName(codName);
     }
 
+    @Override
+    public StatusCod findStatusCodById(short id) {
+        return statusCodDAO.findStatusCodById(id);
+    }
+
 }

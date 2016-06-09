@@ -21,4 +21,6 @@ public interface StatusCodDAO {
     public List findStatusCodByGroupId(short groupId);
 
     public StatusCod findStatusCodByCodName(String codName);
+
+    public StatusCod findStatusCodById(short id);
 }

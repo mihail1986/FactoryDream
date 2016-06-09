@@ -28,7 +28,7 @@ public class NoteGroupsDAOImpl extends AbstractSpringDao implements NoteGroupsDA
 
     @Override
     public NoteGroups findNoteGroupsById(long id) {
-        return (NoteGroups) super.find(NoteGroups.class, id);
+        return (NoteGroups) super.findClassById(NoteGroups.class, id);
     }
 
 }

@@ -21,4 +21,6 @@ public interface ModelsService {
     public List findAllEnableModels();
 
     public List findAllEnableModelsRest();
+
+    public Models findModelsById(short id);
 }

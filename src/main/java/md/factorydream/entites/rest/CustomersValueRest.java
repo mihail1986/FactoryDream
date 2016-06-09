@@ -5,6 +5,8 @@
  */
 package md.factorydream.entites.rest;
 
+import java.util.Date;
+
 /**
  *
  * @author Zaițev.Victor

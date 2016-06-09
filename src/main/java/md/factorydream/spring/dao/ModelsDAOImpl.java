@@ -31,4 +31,9 @@ public class ModelsDAOImpl extends AbstractSpringDao implements ModelsDAO {
         return super.findAllDataEnableObject(Models.class);
     }
 
+    @Override
+    public Models findModelsById(short id) {
+        return (Models) super.findClassById(Models.class, id);
+    }
+
 }

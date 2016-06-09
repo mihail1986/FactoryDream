@@ -21,4 +21,8 @@ public interface CustomersService {
     public List findAllEnableCustomers();
 
     public List findAllEnableCustomersRest();
+
+    public List findAllRest();
+
+    public Customers findCustomersById(long id);
 }

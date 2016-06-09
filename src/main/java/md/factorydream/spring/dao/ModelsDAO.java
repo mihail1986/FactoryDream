@@ -19,4 +19,6 @@ public interface ModelsDAO {
     public List findAll();
 
     public List findAllEnableModels();
+
+    public Models findModelsById(short id);
 }

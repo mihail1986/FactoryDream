@@ -21,4 +21,6 @@ public interface DiametersService {
     public List findAllEnableDiameters();
 
     public List findAllEnableDiametersRest();
+
+    public Diameters findDiametersById(short id);
 }

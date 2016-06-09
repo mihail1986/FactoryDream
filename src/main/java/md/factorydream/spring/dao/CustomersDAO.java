@@ -19,4 +19,6 @@ public interface CustomersDAO {
     public List findAll();
 
     public List findAllEnableCustomers();
+
+    public Customers findCustomersById(long id);
 }

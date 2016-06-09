@@ -31,4 +31,9 @@ public class CustomersDAOImpl extends AbstractSpringDao implements CustomersDAO 
         return super.findAllDataEnableObject(Customers.class);
     }
 
+    @Override
+    public Customers findCustomersById(long id) {
+        return (Customers) super.findClassById(Customers.class, id);
+    }
+
 }

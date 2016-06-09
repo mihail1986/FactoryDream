@@ -7,15 +7,19 @@ body {
 }
 
 textarea.non-resize {
-     resize: none;
-     min-height: 50px;
-     margin-bottom: 5px !important;
+    resize: none;
+    min-height: 50px;
+    margin-bottom: 5px !important;
 }
 
 .clear-both{
-     clear: both;
+    clear: both;
 }
 
-.modal-table{
+.padding-5px{
+    padding: 5px !important;
+}
+
+.marginBottom-0px{
     margin-bottom: 0px !important;
 }

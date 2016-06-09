@@ -54,11 +54,7 @@ public class ParamNamesDAOImpl extends AbstractSpringDao implements ParamNamesDA
 
         int result = query.executeUpdate();
 
-        if (result <= 0) {
-            return false;
-        }
-
-        return true;
+        return result > 0;
     }
 
     @Override
