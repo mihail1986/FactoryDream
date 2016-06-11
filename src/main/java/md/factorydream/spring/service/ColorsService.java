@@ -21,4 +21,6 @@ public interface ColorsService {
     public List findAllEnableColors();
 
     public List findAllEnableColorsRest();
+
+    public Colors findColorsById(short id);
 }

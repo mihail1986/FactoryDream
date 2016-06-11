@@ -19,4 +19,6 @@ public interface TypesDAO {
     public List findAll();
 
     public List findAllEnableTypes();
+
+    public Types findTypesById(short id);
 }

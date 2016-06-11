@@ -4,14 +4,14 @@
  *  Author     : Mihail.Cepraga
  */
 
-angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', '$uibModalInstance', 'orderModules', 'orderColors', 'orderTypes', 'orderDiameters', 'orderCustomers', 'orderThreads', 'orderParametersNamesService', function ($scope, $uibModalInstance, orderModules, orderColors, orderTypes, orderDiameters, orderCustomers, orderThreads, orderParametersNamesService) {
+angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', '$uibModalInstance', 'orderModels', 'orderColors', 'orderTypes', 'orderDiameters', 'orderCustomers', 'orderThreads', 'orderParametersNamesService', 'ordersService', function ($scope, $uibModalInstance, orderModels, orderColors, orderTypes, orderDiameters, orderCustomers, orderThreads, orderParametersNamesService, ordersService) {
 
         var self = this;
-        
+
         self.params = orderParametersNamesService.OrderParametersNames().get();
-        
+
         $scope.newOrderCustomer = orderCustomers;
-        $scope.neworderModules = orderModules;
+        $scope.neworderModels = orderModels;
         $scope.neworderColors = orderColors;
         $scope.neworderTypes = orderTypes;
         $scope.neworderDiameters = orderDiameters;
@@ -22,7 +22,7 @@ angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', 
         $scope.newOrder = {};
         $scope.newOrder.orderParameters = [];
 
-        self.fetchAllOrderParametersValues = function(){
+        self.fetchAllOrderParametersValues = function () {
             $scope.orderParameters = angular.copy(self.params);
         };
 
@@ -33,19 +33,17 @@ angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', 
             $scope.newOrderParameter.value = '';
         };
 
-        $scope.addNewOrderFormSubmit = function (isValid) {
+        $scope.addNewOrderFormSubmit = function () {
 
-            self.packingDataForSending($scope.newOrder);
+            ordersService.Orders().create(self.packingDataForSending($scope.newOrder));
+
+//            self.packingDataForSending($scope.newOrder);
 
             // check to make sure the form is completely valid
-            if (isValid) {
-                alert('our form is amazing');
-            }
-
         };
 
         $scope.resetAddNewOrderForm = function () {
-            
+
             self.fetchAllOrderParametersValues();
             $scope.newOrder = {};
             $scope.newOrderParameters = [];
@@ -61,69 +59,38 @@ angular.module('ordersApp').controller('addNewOrderModalController', ['$scope', 
             opened: false;
         };
 
+        $scope.openDeliveryPicker = function () {
+            $scope.orderDeliveryPopup.opened = true;
+        };
+        $scope.orderDeliveryPopup = function () {
+            opened: false;
+        };
+
         $scope.closeModal = function () {
             $uibModalInstance.close('close');
         };
 
         self.packingDataForSending = function (order) {
-            var orderKeys = Object.keys(order);
             var newOrderToAdd = {};
-            newOrderToAdd.orderParameterses = new Array();
-            for (var i = 0; i < orderKeys.length; i++) {
 
-                switch (orderKeys[i])
-                {
-                    case '$$hashKey':
-                        break;
-                    case 'id':
-                        newOrderToAdd["id"] = order[orderKeys[i]];
-                        break;
-                    case 'customer':
-                        newOrderToAdd["customer"] = order[orderKeys[i]];
-                        break;
-                    case 'color':
-                        newOrderToAdd["color"] = order[orderKeys[i]];
-                        break;
-                    case 'diameter':
-                        newOrderToAdd["diameter"] = order[orderKeys[i]];
-                        break;
-                    case 'delivery':
-                        newOrderToAdd["delivery"] = order[orderKeys[i]];
-                        break;
-                    case 'model':
-                        newOrderToAdd["model"] = order[orderKeys[i]];
-                        break;
-                    case 'orderData':
-                        newOrderToAdd["orderData"] = order[orderKeys[i]];
-                        break;
-                    case 'orderIdentifier':
-                        newOrderToAdd["orderIdentifier"] = order[orderKeys[i]];
-                        break;
-                    case 'model':
-                        newOrderToAdd["model"] = order[orderKeys[i]];
-                        break;
-                    case 'status':
-                        newOrderToAdd["status"] = order[orderKeys[i]];
-                        break;
-                    case 'thread':
-                        newOrderToAdd["thread"] = order[orderKeys[i]];
-                        break;
-                    case 'type':
-                        newOrderToAdd["type"] = parseInt(order[orderKeys[i]]);
-                        break;
-                    case 'quantity':
-                        newOrderToAdd["quantity"] = order[orderKeys[i]];
-                        break;
-                    case 'orderNotes':
-                        newOrderToAdd["orderNotes"] = order[orderKeys[i]];
-                        break;
-                    default:
-                        newOrderToAdd.orderParameterses.push({"paramName": orderKeys[i], "paramValue": order[orderKeys[i]]});
-                }
-            }
-            ;
-            console.log(order);
+            newOrderToAdd["customer"] = order.customer["value"];
+            newOrderToAdd["color"] = order.color["value"];
+            newOrderToAdd["diameter"] = order.diameter["value"];
+            newOrderToAdd["model"] = order.model["value"];
+            newOrderToAdd["type"] = order.type["value"];
+            newOrderToAdd["thread"] = order.thread["value"];
+            newOrderToAdd["orderData"] = order.orderData;
+            newOrderToAdd["delivery"] = order.delivery;
+            newOrderToAdd["quantity"] = order.quantity;
+            newOrderToAdd.orderParameterses = order.orderParameters;
+            newOrderToAdd.orderIdentifier = order.orderIdentifier;
+            newOrderToAdd.status = 1;
+
+            console.log("----------------------- packingDataForSending --------------------------------");
+            console.log(newOrderToAdd);
             return newOrderToAdd;
+
+
         };
 
     }]);

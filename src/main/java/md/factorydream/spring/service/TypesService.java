@@ -21,4 +21,6 @@ public interface TypesService {
     public List findAllEnableTypes();
 
     public List findAllEnableTypesRest();
+
+    public Types findTypesById(short id);
 }

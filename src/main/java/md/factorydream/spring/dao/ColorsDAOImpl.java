@@ -31,4 +31,9 @@ public class ColorsDAOImpl extends AbstractSpringDao implements ColorsDAO {
         return super.findAllDataEnableObject(Colors.class);
     }
 
+    @Override
+    public Colors findColorsById(short id) {
+        return (Colors) super.findClassById(Colors.class, id);
+    }
+
 }

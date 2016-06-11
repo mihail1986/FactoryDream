@@ -11,7 +11,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         $scope.orderAddFlag = true;
         self.orders = [];
         $scope.ordersGridData = {};
-        $scope.modulesValue = {};
+        $scope.modelsValue = {};
         $scope.colorsValue = {};
         $scope.typesValue = {};
         $scope.diametersValue = {};
@@ -22,7 +22,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
         self.fetchAllModelsValue = function () {
             modelService.Models().query().$promise.then(function (result) {
-                $scope.modulesValue = result;
+                $scope.modelsValue = result;
             });
         };
         self.fetchAllColorsValue = function () {
@@ -73,8 +73,8 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     $scope.ordersGridData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
                     $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
                     $scope.ordersGridData.columnDefs[3].filter.selectOptions = $scope.customersValue;
-                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
-                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modelsValue;
+                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modelsValue;
                     $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
                     $scope.ordersGridData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
                     $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
@@ -94,7 +94,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 case "update":
                     $scope.ordersGridData.columnDefs = self.fullAccess;
                     $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modelsValue;
                     $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
                     $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
                     $scope.ordersGridData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
@@ -109,7 +109,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 case "insert":
                     $scope.ordersGridData.columnDefs = self.fullAccess;
                     $scope.ordersGridData.columnDefs[3].editDropdownOptionsArray = $scope.customersValue;
-                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[7].editDropdownOptionsArray = $scope.modelsValue;
                     $scope.ordersGridData.columnDefs[10].editDropdownOptionsArray = $scope.diametersValue;
                     $scope.ordersGridData.columnDefs[11].editDropdownOptionsArray = $scope.typesValue;
                     $scope.ordersGridData.columnDefs[12].editDropdownOptionsArray = $scope.threadsValue;
@@ -125,7 +125,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     $scope.ordersGridData.columnDefs = self.readOnlyAccess;
                     $scope.ordersGridData.columnDefs[1].filter.selectOptions = $scope.statusesValue;
                     $scope.ordersGridData.columnDefs[3].filter.selectOptions = $scope.customersValue;
-                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modulesValue;
+                    $scope.ordersGridData.columnDefs[7].filter.selectOptions = $scope.modelsValue;
                     $scope.ordersGridData.columnDefs[10].filter.selectOptions = $scope.diametersValue;
                     $scope.ordersGridData.columnDefs[11].filter.selectOptions = $scope.typesValue;
                     $scope.ordersGridData.columnDefs[12].filter.selectOptions = $scope.threadsValue;
@@ -191,8 +191,8 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 controller: 'addNewOrderModalController',
                 size: size,
                 resolve: {
-                    orderModules: function () {
-                        return $scope.modulesValue;
+                    orderModels: function () {
+                        return $scope.modelsValue;
                     },
                     orderColors: function () {
                         return $scope.colorsValue;
@@ -247,7 +247,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 , filter: {type: uiGridConstants.filter.SELECT}
                 , editType: 'dropdown'
                 , editableCellTemplate: 'ui-grid/dropdownEditor'
-                , cellFilter: "griddropdown:grid.appScope.modulesValue:row.entity.model"
+                , cellFilter: "griddropdown:grid.appScope.modelsValue:row.entity.model"
                 , editDropdownIdLabel: 'value'
                 , editDropdownValueLabel: 'label'
             },

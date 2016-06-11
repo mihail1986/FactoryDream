@@ -31,4 +31,9 @@ public class TypesDAOImpl extends AbstractSpringDao implements TypesDAO {
         return super.findAllDataEnableObject(Types.class);
     }
 
+    @Override
+    public Types findTypesById(short id) {
+        return (Types) super.findClassById(Types.class, id);
+    }
+
 }

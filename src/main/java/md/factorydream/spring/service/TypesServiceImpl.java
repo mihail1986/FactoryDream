@@ -62,4 +62,10 @@ public class TypesServiceImpl implements TypesService {
 
     }
 
+    @Override
+    @Transactional
+    public Types findTypesById(short id) {
+        return typesDAO.findTypesById(id);
+    }
+
 }

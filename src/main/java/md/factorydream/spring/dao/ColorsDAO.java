@@ -19,4 +19,6 @@ public interface ColorsDAO {
     public List findAll();
 
     public List findAllEnableColors();
+
+    public Colors findColorsById(short id);
 }

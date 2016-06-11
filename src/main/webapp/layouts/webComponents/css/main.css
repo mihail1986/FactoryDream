@@ -23,3 +23,18 @@ textarea.non-resize {
 .marginBottom-0px{
     margin-bottom: 0px !important;
 }
+
+.marginBottomTop-5px{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.panel-body-height150px-overflow{
+  height: 100px !important;
+  overflow-y: auto !important;
+  width: 100% !important;
+  }
+
+.row-marginTop-10px{
+    margin-top: 10px !important;
+  }

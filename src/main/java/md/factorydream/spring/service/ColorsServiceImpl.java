@@ -61,4 +61,9 @@ public class ColorsServiceImpl implements ColorsService {
 
     }
 
+    @Override
+    @Transactional
+    public Colors findColorsById(short id) {
+        return colorsDAO.findColorsById(id);
+    }
 }
