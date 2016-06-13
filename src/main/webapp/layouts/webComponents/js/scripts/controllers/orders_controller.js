@@ -19,6 +19,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
         $scope.threadsValue = {};
         $scope.statusesValue = {};
         $scope.orderParameters = [];
+        $scope.advanceFiltrationData;
 
         self.fetchAllModelsValue = function () {
             modelService.Models().query().$promise.then(function (result) {
@@ -63,7 +64,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 self.initOrderGridColumn($scope.user_access);
             });
         };
-        
+
         self.initOrderGridColumn = function (userAccess) {
 
             switch (userAccess) {
@@ -89,7 +90,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                     $scope.ordersGridData.exporterMenuPdf = false;
                     $scope.ordersGridData.exporterCsvFilename = 'myFile.csv';
                     $scope.orderAddFlag = false;
-                    
+
                     break;
                 case "update":
                     $scope.ordersGridData.columnDefs = self.fullAccess;
@@ -354,6 +355,24 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
 
         self.initOrdersGrid();
 
+        $scope.initAdvanceFiltrationData = function () {
+            $scope.advanceFiltrationData = [{title: "Customer",
+                    content: $scope.customersValue},
+                {title: "Models",
+                    content: $scope.modelsValue},
+                {title: "Colors",
+                    content: $scope.colorsValue},
+                {title: "Types",
+                    content: $scope.typesValue},
+                {title: "Diameters",
+                    content: $scope.diametersValue},
+                {title: "Threads",
+                    content: $scope.threadsValue},
+                {title: "Statuses",
+                    content: $scope.statusesValue}
+            ];
+        };
+
         self.biuldData = function (OrderSourceData) {
 
             for (i = 0; i < OrderSourceData.length; i++) {
@@ -361,7 +380,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 var parameters = {};
                 for (j = 0; j < OrderSourceData[i].orderParameterses.length; j++) {
                     parameters[OrderSourceData[i].orderParameterses[j].paramName] = OrderSourceData[i].orderParameterses[j].paramValue;
-                }                
+                }
                 parameters.id = OrderSourceData[i].id;
                 parameters.orderData = OrderSourceData[i].orderData;
                 parameters.customer = OrderSourceData[i].customer;
@@ -375,7 +394,7 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
                 parameters.delivery = OrderSourceData[i].delivery;
                 parameters.status = OrderSourceData[i].status;
                 parameters.orderNotes = OrderSourceData[i].orderNotes;
-                
+
                 self.orders.push(parameters);
             }
 
@@ -462,6 +481,8 @@ angular.module('ordersApp').controller('ordersController', ['$scope', '$uibModal
             for (var i = 0; i < map.length; i++) {
                 if (map[i]['value'] === input) {
                     return map[i]['label'];
+                } else if (initial === 1) {
+                    return "None";
                 }
             }
         } else if (initial === 1) {

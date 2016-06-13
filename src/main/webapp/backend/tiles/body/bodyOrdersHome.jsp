@@ -21,7 +21,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#"><span class="glyphicon glyphicon-filter"></span> Filtrare Avansata</a></li>
+                     <li><a href="#" ng-model="advanceFiltration" ng-click="initAdvanceFiltrationData()" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0"><span class="glyphicon glyphicon-filter"></span> Advance filtration</a></li>
                     <li><a href="#">Link</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -31,114 +31,10 @@
             </div><!-- /.navbar-collapse -->
         </div>
     </nav>
-    <div class="container-fluid" ng-hide="true">
-        <div class="row row-marginTop-10px">
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Models</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="model in modelsValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{model.value}}">
-                                    {{model.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Clients</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="customer in customersValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{customer.value}}">
-                                    {{customer.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Diameters</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="diameter in diametersValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{diameter.value}}">
-                                    {{diameter.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Colors</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="color in colorsValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{color.value}}">
-                                    {{color.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Types</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="type in typesValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{type.value}}">
-                                    {{type.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Threads</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="thread in threadsValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{thread.value}}">
-                                    {{thread.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Statuses</div>
-                    <div class="panel-body padding-5px panel-body-height150px-overflow">
-                        <div ng-repeat="status in statusesValue">
-                            <div class="checkbox marginBottomTop-5px">
-                                <label>
-                                    <input type="checkbox" id="checkboxSuccess" value="{{status.value}}">
-                                    {{status.label}}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- END row div-->
+    <div class="container-fluid" ng-hide="!advanceFiltration">
+
+        <div class="orders-advance-filtring"></div>
+        
     </div> <!-- END container-fluid div-->
     
     <!--    <div class="jumbotron">

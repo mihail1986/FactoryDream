@@ -30,4 +30,11 @@ angular.module('ordersApp').directive("orderNotes", function() {
         return 'js/scripts/templates/addNewOrderForm.html';
         }
     };
+}).directive("ordersAdvanceFiltring", function() {
+    return {
+        restrict : "C",
+        templateUrl: function(){
+        return 'js/scripts/templates/ordersAdvanceFiltring.html';
+        }
+    };
 });
